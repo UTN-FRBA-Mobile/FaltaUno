@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\BCBA-NB\.android\build-cache\08c1722c1e453179ffaf5395cfda3e966aaa658e\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f063382a0d5fa4329d2c603235bb4e9c774499a1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BCBA-NB\.android\build-cache\e8ee89810ceec1328bbb4cdf8d8bf9c06a57546f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4ecdc4d4d8f2608fe456a95ccc8b242dbdb210c7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BCBA-NB\.android\build-cache\2e92196f1aff2e86ff28b471c49986766a5cdb29\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_7f38749a86ef32c57a5bfd8b6ac501429af18886\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fa55fef1b547330425bc5646ad752af5e0185c21">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_3da574c559995ee86df5b8ed958529987b84904b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BCBA-NB\.android\build-cache\31444f041cea9ad21ba1991d59056d00ca169953\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_58be49982d50c2124cb53c7bdc2b40d55cb69f92\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BCBA-NB\.android\build-cache\00834452f5577bd7429fd5b177a73b1ae82fd168\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ea6a989b83d19b1b461281e0475a6cd6514897f8">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_2bd12dd1cb68a3ca2fd2a5e78a5b6c8f43f610e2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BCBA-NB\.android\build-cache\c74c62b6bddfefae4af454da208cfe65b249bffe\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="152de8da301561dcb0946471697a420d8f7a68c5">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_1ad15ce0b9e47a01ec5e2f6e2fd1a2968451f735\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BCBA-NB\.android\build-cache\7395f256320f36db0372c96669012772b2355e67\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="810f41e5b7fd99f196ebeabe865ba2c54e7e76dc">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_694382a51fe30f69509e8bbf830df8c7eccf7fc2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BCBA-NB\.android\build-cache\446837c00dd9079f324d6ba99033cc1521dccf57\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="702d339bc0a81d21354cd7e2cf2b67225fa4a16c">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4763ee778926554cde3e4ea96692bac107774fcd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BCBA-NB\.android\build-cache\0459afc921afd4b91b14c39b63b4ce24ad59bf97\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_927b960307a8af7cd8575d92dbda37254147ba37\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BCBA-NB\.android\build-cache\bca2af773ba4e3a7ef4d032a4588a59ec9a7b204\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_996b3f87fe07c893b1ad78f1f9ec7b1f93f9f120\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BCBA-NB\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.2.0\support-annotations-25.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.2.0_cbfb93456a1aa475a7a0b58363f47124d18393e5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BCBA-NB\.android\build-cache\5f47302ecd3c32f888332f5f46689d484caa1a7f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="cc03ddac6017ba6366944c3eb01efc8751a00a6b">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_15576cf1da6a61aace74f90a175417b3d2f11d51\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_25adae44c5e470e50e3ce2092624bd9f0b865514\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BCBA-NB\.android\build-cache\395339c4027d48c608c96928487dcd3b8f56b4cc\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="cb454b52545859ed2f24a6c01366805b0fa04b22">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f1ba007d8da9e4fc449b34fbfb69139f4b736073\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BCBA-NB\.android\build-cache\ce22166d4872c77a91b4afe4361dbce05d936241\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e51c2f662bb72419632af5192553c37e33890a99">
+        <dex dex="C:\Facultad\Android\falta_uno_ok\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ca2d8874fd4088c2d31c9f6f6e9478b0997f48c5\classes.dex" />
+    </item>
+
+</items>
