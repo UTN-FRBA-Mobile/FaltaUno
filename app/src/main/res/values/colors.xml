@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4caf50</color>
+    <color name="colorPrimaryDark">#257e2e</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="verde_azulado_intenso">#52e8c7</color>
+    <color name="hueso">#fcf7f7</color>
+</resources>
