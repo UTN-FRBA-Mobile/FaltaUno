@@ -19,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.fragmentContainer, new FragmentProxPartidos(), "FragmentProxPartidos")
+//                .commit();
+//        tieneDosFragments = findViewById(R.id.contentFrame) != null;
+
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher_toolbar);
 
