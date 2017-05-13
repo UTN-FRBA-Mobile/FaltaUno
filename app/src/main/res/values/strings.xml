@@ -7,4 +7,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="facebook_app_id">1869038746689339</string>
+    <string name="cancel_login">Login Cancelado</string>
+    <string name="mensaje_error">Hubo un error.</string>
+    <string name="logout">Cerrar Sesión</string>
 </resources>
