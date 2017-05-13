@@ -2,6 +2,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.faltauno.faltauno.MainActivity">
+    <item android:id="@+id/action_search"
+        android:title="@string/search_title"
+        android:icon="@drawable/ic_search"
+        android:showAsAction="ifRoom"
+        android:orderInCategory="1"
+        android:menuCategory="secondary"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
@@ -17,5 +23,4 @@
         android:orderInCategory="100"
         android:title="@string/action_about"
         app:showAsAction="never" />
-
 </menu>

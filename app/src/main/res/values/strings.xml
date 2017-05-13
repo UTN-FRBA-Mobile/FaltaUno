@@ -3,6 +3,8 @@
     <string name="action_settings">Ajustes</string>
     <string name="action_profile">Perfil</string>
     <string name="action_about">Acerca de...</string>
+    <string name="search_title">Buscar</string>
+    <string name="search_hint">Partido...</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
