@@ -24,7 +24,15 @@ public class CustomFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return PageFragment.newInstance(position + 1);
+        String texto = "esto es un texto";
+        //Por default devuelvo siempre el de proximos partidos
+        switch (position) {
+            case 1:
+                return PageFragment.newInstance(position + 1);
+            case 2:
+                return PageFragment.newInstance(position + 1);
+    }
+        return FragmentProxPartidos.newInstance(texto);
     }
 
     @Override
