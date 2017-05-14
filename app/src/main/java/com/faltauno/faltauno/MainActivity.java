@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        LinearLayout main_linear = (LinearLayout)findViewById(R.id.parent);
     }
 
     @Override
@@ -57,20 +61,26 @@ public class MainActivity extends AppCompatActivity {
 
     //cneira84 - metodo llamado por el menu definido en menu_main.xml
     public void action_about(MenuItem item){
+        //Busco el id del Main Activity para setearle la transparencia
+        LinearLayout main_layout = (LinearLayout)findViewById(R.id.activity_main);
+        main_layout.setAlpha(0.4F);
+
+        //Codigo para el popup
         LayoutInflater layoutInflater = (LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = layoutInflater.inflate(R.layout.about, null);
         final PopupWindow popupWindow = new PopupWindow(
                 popupView,
-                Toolbar.LayoutParams.WRAP_CONTENT,
-                Toolbar.LayoutParams.WRAP_CONTENT);
-
+                Toolbar.LayoutParams.MATCH_PARENT,
+                Toolbar.LayoutParams.MATCH_PARENT);
         Button buttonOK = (Button)popupView.findViewById(R.id.button_ok);
         buttonOK.setOnClickListener(new Button.OnClickListener(){
-
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 popupWindow.dismiss();
+                //Busco el id del Main Activity para setearlo nuevamente opaco
+                LinearLayout main_layout = (LinearLayout)findViewById(R.id.activity_main);
+                main_layout.setAlpha(1);
             }});
 
         popupWindow.showAsDropDown(buttonOK, 50, -30);
