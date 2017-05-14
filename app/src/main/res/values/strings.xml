@@ -7,7 +7,7 @@
     <string name="search_title">Buscar</string>
     <string name="search_hint">Partido...</string>
     <string name="about_version">Falta Uno V1.0</string>
-    <string name="about_disconnect">Desconectarse</string>
+    <string name="action_disconnect">Desconectarse</string>
     <string name="button_OK">ACEPTAR</string>
     <string name="detalle_partido_titulo">Detalle del Partido</string>
     <string name="detalle_partido_hora">19:00 hs</string>
