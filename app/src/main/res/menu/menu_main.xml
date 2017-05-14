@@ -7,20 +7,24 @@
         android:icon="@drawable/ic_search"
         app:showAsAction="ifRoom"
         android:orderInCategory="1"
-        android:menuCategory="secondary"/>
+        android:menuCategory="secondary"
+        android:onClick="action_search"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:onClick="action_settings"/>
     <item
         android:id="@+id/action_profile"
         android:orderInCategory="100"
         android:title="@string/action_profile"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:onClick="action_profile"/>
     <item
         android:id="@+id/action_about"
         android:orderInCategory="100"
         android:title="@string/action_about"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:onClick="action_about"/>
 </menu>
