@@ -5,4 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="verde_azulado_intenso">#52e8c7</color>
     <color name="hueso">#fcf7f7</color>
+    <color name="verde_suave">#c5dfb9</color>
+    <color name="verde_militar">#5d814d</color>
+    <color name="verde_oscuro">#334d28</color>
+    <color name="verde_azulado_oscuro">#3aa28b</color>
 </resources>
