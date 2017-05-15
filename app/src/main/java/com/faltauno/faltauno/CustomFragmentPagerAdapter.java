@@ -30,7 +30,7 @@ public class CustomFragmentPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return PageFragment.newInstance(position + 1);
             case 2:
-                return PageFragment.newInstance(position + 1);
+                return NuevoPartido.newInstance(texto);
     }
         return FragmentProxPartidos.newInstance(texto);
     }

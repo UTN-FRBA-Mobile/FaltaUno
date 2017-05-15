@@ -76,11 +76,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void logout(View view) {
-        LoginManager.getInstance().logOut();
-        andaYLogueate();
-    }
-
     //cneira84 - metodo llamado por el menu definido en menu_main.xml
     public void action_profile(MenuItem item) {
         //Busco el id del Main Activity para setearle la transparencia
@@ -140,6 +135,11 @@ public class MainActivity extends AppCompatActivity {
         Intent settings_i = new Intent(this, SettingsActivity.class);
         startActivity(settings_i);
         return true;
+    }
+
+    public void action_disconnects(MenuItem item){
+    LoginManager.getInstance().logOut();
+    andaYLogueate();
     }
 
     //cneira84 - metodo llamado por el menu definido en menu_main.xml
