@@ -3,12 +3,14 @@ package com.faltauno.faltauno;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,10 +26,14 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import static android.R.attr.tag;
+import static android.R.id.message;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -66,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        final Intent settings = new Intent(this, SettingsActivity.class);
         return true;
     }
 
@@ -76,6 +83,29 @@ public class MainActivity extends AppCompatActivity {
 
     //cneira84 - metodo llamado por el menu definido en menu_main.xml
     public void action_profile(MenuItem item) {
+        //Busco el id del Main Activity para setearle la transparencia
+        LinearLayout main_layout = (LinearLayout)findViewById(R.id.activity_main);
+        main_layout.setAlpha(0.4F);
+
+        //Codigo para el popup
+        LayoutInflater layoutInflater = (LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = layoutInflater.inflate(R.layout.fragment_profile, null);
+        final PopupWindow popupWindow = new PopupWindow(
+                popupView,
+                Toolbar.LayoutParams.MATCH_PARENT,
+                Toolbar.LayoutParams.MATCH_PARENT);
+        Button buttonOK = (Button)popupView.findViewById(R.id.buttonOK);
+        buttonOK.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                popupWindow.dismiss();
+                //Busco el id del Main Activity para setearlo nuevamente opaco
+                LinearLayout main_layout = (LinearLayout)findViewById(R.id.activity_main);
+                main_layout.setAlpha(1);
+            }});
+
+        popupWindow.showAsDropDown(buttonOK, 50, -30);
     }
 
     //cneira84 - metodo llamado por el menu definido en menu_main.xml
@@ -91,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 popupView,
                 Toolbar.LayoutParams.MATCH_PARENT,
                 Toolbar.LayoutParams.MATCH_PARENT);
-        Button buttonOK = (Button)popupView.findViewById(R.id.button_ok);
+        Button buttonOK = (Button)popupView.findViewById(R.id.buttonOK);
         buttonOK.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -106,7 +136,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //cneira84 - metodo llamado por el menu definido en menu_main.xml
-    public void action_settings(MenuItem item) {
+    public boolean action_settings(MenuItem item) {
+        Intent settings_i = new Intent(this, SettingsActivity.class);
+        startActivity(settings_i);
+        return true;
     }
 
     //cneira84 - metodo llamado por el menu definido en menu_main.xml

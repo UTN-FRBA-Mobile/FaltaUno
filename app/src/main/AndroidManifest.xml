@@ -32,6 +32,12 @@
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
         </activity>
+        <activity android:name=".SettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.APPLICATION_PREFERENCES" />
+            </intent-filter>
+            <meta-data android:name="android.app.preference_screen"
+                android:resource="@xml/preference_screen"/>
+        </activity>
     </application>
-
 </manifest>

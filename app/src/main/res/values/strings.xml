@@ -3,9 +3,9 @@
     <string name="app_name">Falta Uno</string>
     <string name="action_settings">Ajustes</string>
     <string name="action_profile">Perfil</string>
-    <string name="action_about">Acerca de...</string>
+    <string name="action_about">Acerca de</string>
     <string name="search_title">Buscar</string>
-    <string name="search_hint">Partido...</string>
+    <string name="search_hint">Partido</string>
     <string name="about_version">Falta Uno V1.0</string>
     <string name="action_disconnect">Desconectarse</string>
     <string name="button_OK">ACEPTAR</string>
@@ -25,4 +25,7 @@
     <string name="cancel_login">Login Cancelado</string>
     <string name="mensaje_error">Hubo un error.</string>
     <string name="logout">Cerrar Sesión</string>
+    <string name="ajustes_title">Ajustes</string>
+    <string name="perfil_hist_jugados">Jugados:</string>
+    <string name="perfil_hist_creados">Creados:</string>
 </resources>
