@@ -16,7 +16,14 @@
     <string name="detalle_partido_dur">Duración</string>
     <string name="detalle_partido_precio">Precio:</string>
     <string name="detalle_partido_anfitrion">Anfitrion</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nuevo_partido_titulo">Nuevo Partido</string>
+    //Hardcodeo strings para canchas
+    <string-array name="canchas_array">
+        <item>Elegí la cancha...</item>
+        <item>cancha 1</item>
+        <item>cancha 2</item>
+        <item>cancha 3</item>
+        <item>cancha 4</item>
+        <item>cancha 5</item>
+    </string-array>
 </resources>

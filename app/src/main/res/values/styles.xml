@@ -33,5 +33,10 @@
 
     <style name="FaltaUno.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    //Agrego style para poder aumentar la fuente del numberPicker
+    <style name="NumberPickerText">
+        <item name="android:textSize">25dp</item>
+    </style>
+
 
 </resources>

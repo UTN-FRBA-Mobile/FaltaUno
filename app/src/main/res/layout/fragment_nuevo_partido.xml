@@ -1,13 +1,121 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.faltauno.faltauno.NuevoPartido">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:baselineAligned="false">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="0.11"
+            android:text="@string/nuevo_partido_titulo"
+            android:textSize="28dp" />
+
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.11"
+            android:overlapAnchor="false" />
+
+
+        <LinearLayout
+            android:layout_width="196dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="date"
+                android:text="Fecha..."
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="50px"
+                android:layout_marginRight="0px"
+                android:ems="10"
+                android:inputType="time"
+                android:text="Horario..."
+                android:textAlignment="center"
+                android:layout_weight="0.74" />
+
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.07"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Ponele un nombre al partido..." />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.11" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.08"
+            android:text="Los jugadores requieren aprobación"
+            android:textSize="20dp" />
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.11" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_weight="0.17"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Cuántos jugadores te faltan?"
+                android:textSize="20dp" />
+
+            <NumberPicker
+                android:id="@+id/numeroJugadores"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:theme="@style/NumberPickerText" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
 </FrameLayout>
