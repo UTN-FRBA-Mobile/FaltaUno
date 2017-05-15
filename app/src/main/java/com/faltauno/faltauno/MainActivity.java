@@ -3,12 +3,14 @@ package com.faltauno.faltauno;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,10 +22,14 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import static android.R.attr.tag;
+import static android.R.id.message;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -52,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        final Intent settings = new Intent(this, SettingsActivity.class);
         return true;
     }
 
@@ -87,7 +94,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //cneira84 - metodo llamado por el menu definido en menu_main.xml
-    public void action_settings(MenuItem item) {
+    public boolean action_settings(MenuItem item) {
+        Intent settings_i = new Intent(this, SettingsActivity.class);
+        startActivity(settings_i);
+        return true;
     }
 
     //cneira84 - metodo llamado por el menu definido en menu_main.xml
