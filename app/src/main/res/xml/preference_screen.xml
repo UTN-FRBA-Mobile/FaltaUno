@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceCategory
+    android:key="pref_key_security_settings">
+    <SwitchPreference
+        android:key="pref_key_location"
+        android:summary="@string/pref_summary_location"
+        android:title="@string/pref_title_location"
+        android:defaultValue="false"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_key_app_settings">
+        <SwitchPreference
+            android:key="pref_key_history"
+            android:summary="@string/pref_summary_history"
+            android:title="@string/pref_title_history"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+</PreferenceScreen>
