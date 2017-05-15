@@ -19,4 +19,17 @@
     <string name="pref_title_location">Compartir Ubicación</string>
     <string name="pref_summary_history">Permite guardar el historial de los partidos en los cuales participo</string>
     <string name="pref_title_history">Historial de Partidos</string>
+    <string name="detalle_partido_anfitrion">Anfitrion</string>
+    <string name="pref_summary_location">Deshabilita la opción de compartir ubicación</string>
+    <string name="pref_title_location">Compartir Ubicación</string>
+    <string name="pref_summary_history">Permite guardar el historial de los partidos en los cuales participo</string>
+    <string name="pref_title_history">Historial de Partidos</string>
+    <string name="pref_title_history2">Historial de Partidos</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="facebook_app_id">1869038746689339</string>
+    <string name="cancel_login">Login Cancelado</string>
+    <string name="mensaje_error">Hubo un error.</string>
+    <string name="logout">Cerrar Sesión</string>
 </resources>
