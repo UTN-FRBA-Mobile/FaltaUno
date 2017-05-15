@@ -12,6 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.View;
+
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (AccessToken.getCurrentAccessToken() == null) {
+            andaYLogueate();
+        }
 
         //Visualizacion del menu de la toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -48,11 +56,22 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout main_linear = (LinearLayout)findViewById(R.id.parent);
     }
 
+    private void andaYLogueate() {
+        Intent intent = new Intent(this, Login_App.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void logout(View view) {
+        LoginManager.getInstance().logOut();
+        andaYLogueate();
     }
 
     //cneira84 - metodo llamado por el menu definido en menu_main.xml
