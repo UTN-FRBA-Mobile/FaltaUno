@@ -20,4 +20,5 @@
     <string name="pref_title_location">Compartir Ubicación</string>
     <string name="pref_summary_history">Permite guardar el historial de los partidos en los cuales participo</string>
     <string name="pref_title_history">Historial de Partidos</string>
+    <string name="pref_title_history2">Historial de Partidos</string>
 </resources>
