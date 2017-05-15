@@ -64,6 +64,29 @@ public class MainActivity extends AppCompatActivity {
 
     //cneira84 - metodo llamado por el menu definido en menu_main.xml
     public void action_profile(MenuItem item) {
+        //Busco el id del Main Activity para setearle la transparencia
+        LinearLayout main_layout = (LinearLayout)findViewById(R.id.activity_main);
+        main_layout.setAlpha(0.4F);
+
+        //Codigo para el popup
+        LayoutInflater layoutInflater = (LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = layoutInflater.inflate(R.layout.fragment_profile, null);
+        final PopupWindow popupWindow = new PopupWindow(
+                popupView,
+                Toolbar.LayoutParams.MATCH_PARENT,
+                Toolbar.LayoutParams.MATCH_PARENT);
+        Button buttonOK = (Button)popupView.findViewById(R.id.buttonOK);
+        buttonOK.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                popupWindow.dismiss();
+                //Busco el id del Main Activity para setearlo nuevamente opaco
+                LinearLayout main_layout = (LinearLayout)findViewById(R.id.activity_main);
+                main_layout.setAlpha(1);
+            }});
+
+        popupWindow.showAsDropDown(buttonOK, 50, -30);
     }
 
     //cneira84 - metodo llamado por el menu definido en menu_main.xml
@@ -79,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 popupView,
                 Toolbar.LayoutParams.MATCH_PARENT,
                 Toolbar.LayoutParams.MATCH_PARENT);
-        Button buttonOK = (Button)popupView.findViewById(R.id.button_ok);
+        Button buttonOK = (Button)popupView.findViewById(R.id.buttonOK);
         buttonOK.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
