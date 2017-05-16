@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:weightSum="1"
         android:baselineAligned="false">
@@ -24,22 +24,22 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.11"
             android:overlapAnchor="false" />
 
 
         <LinearLayout
-            android:layout_width="196dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/editText2"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:ems="10"
                 android:inputType="date"
                 android:text="Fecha..."
@@ -47,8 +47,8 @@
 
             <EditText
                 android:id="@+id/editText3"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="50px"
                 android:layout_marginRight="0px"
@@ -56,16 +56,15 @@
                 android:inputType="time"
                 android:text="Horario..."
                 android:textAlignment="center"
-                android:layout_weight="0.74" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
 
         <EditText
             android:id="@+id/editText"
-            android:layout_width="267dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.07"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Ponele un nombre al partido..." />
@@ -118,4 +117,4 @@
     </LinearLayout>
 
 
-</FrameLayout>
+</ScrollView>
