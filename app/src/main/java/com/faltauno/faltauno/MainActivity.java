@@ -5,6 +5,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -78,55 +79,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //cneira84 - metodo llamado por el menu definido en menu_main.xml
-    public void action_profile(MenuItem item) {
-        //Busco el id del Main Activity para setearle la transparencia
-        LinearLayout main_layout = (LinearLayout)findViewById(R.id.activity_main);
-        main_layout.setAlpha(0.4F);
-
-        //Codigo para el popup
-        LayoutInflater layoutInflater = (LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = layoutInflater.inflate(R.layout.fragment_profile, null);
-        final PopupWindow popupWindow = new PopupWindow(
-                popupView,
-                Toolbar.LayoutParams.MATCH_PARENT,
-                Toolbar.LayoutParams.MATCH_PARENT);
-        Button buttonOK = (Button)popupView.findViewById(R.id.buttonOK);
-        buttonOK.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                popupWindow.dismiss();
-                //Busco el id del Main Activity para setearlo nuevamente opaco
-                LinearLayout main_layout = (LinearLayout)findViewById(R.id.activity_main);
-                main_layout.setAlpha(1);
-            }});
-
-        popupWindow.showAsDropDown(buttonOK, 50, -30);
+    public boolean action_profile(MenuItem item) {
+        FragmentManager fm = getSupportFragmentManager();
+        ProfileDialogFragment profileDialogFragment = new ProfileDialogFragment();
+        profileDialogFragment.show(fm, "profile");
+        return true;
     }
 
     //cneira84 - metodo llamado por el menu definido en menu_main.xml
     public boolean action_about(MenuItem item){
-        //Busco el id del Main Activity para setearle la transparencia
-        LinearLayout main_layout = (LinearLayout)findViewById(R.id.activity_main);
-        main_layout.setAlpha(0.4F);
-
-        LayoutInflater layoutInflater = (LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        final Dialog dialog = new Dialog(layoutInflater.getContext()); // Context, this, etc.
-        dialog.setContentView(R.layout.about);
-        dialog.setTitle("Titulo");
-        dialog.show();
-
-        //TODO: Modificar para utilizar el default del alert dialog
-        //https://developer.android.com/guide/topics/ui/dialogs.html
-        Button buttonOK = (Button)dialog.findViewById(R.id.buttonOK);
-        buttonOK.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                //Busco el id del Main Activity para setearlo nuevamente opaco
-                LinearLayout main_layout = (LinearLayout)findViewById(R.id.activity_main);
-                main_layout.setAlpha(1);
-            }});
+        FragmentManager fm = getSupportFragmentManager();
+        AboutDialogFragment aboutDialogFragment = new AboutDialogFragment();
+        aboutDialogFragment.show(fm, "about");
         return true;
     }
 
