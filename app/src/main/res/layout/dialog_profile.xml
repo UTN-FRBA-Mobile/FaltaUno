@@ -49,12 +49,14 @@
             android:textSize="16dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"/>
-        <ImageView
+        <ImageButton
+            android:id="@+id/buttonNombreUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_write_icon"
+            android:src="@drawable/ic_write"
             android:layout_gravity="center"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:background="@color/hueso"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
