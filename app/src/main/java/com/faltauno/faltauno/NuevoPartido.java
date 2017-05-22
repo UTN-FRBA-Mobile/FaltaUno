@@ -2,9 +2,11 @@ package com.faltauno.faltauno;
 
 
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+//import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
-import android.support.v4.app.FragmentTransaction;
+//import android.support.v4.app.FragmentTransaction;
 
-import android.app.AlertDialog;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -46,8 +48,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
-
-
+import android.widget.TimePicker;
 
 
 import static com.faltauno.faltauno.R.id.fechaPartido;
@@ -146,7 +147,21 @@ public class NuevoPartido extends Fragment {
             public void onClick(View v) {
                 mostrarCalendario();
             }
+
+
         });
+        //Para timePicker
+        EditText horaPartido = (EditText) vista.findViewById(R.id.horaPartido);
+
+        horaPartido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarReloj();
+            }
+
+
+        });
+
 
         return vista;
 
@@ -161,8 +176,43 @@ public class NuevoPartido extends Fragment {
     }
 
     public void mostrarCalendario() {
-        // TODO Auto-generated method stub
-        //To show current date in the datepicker
+
+        Calendar currentDate = Calendar.getInstance();
+        int year = currentDate.get(Calendar.YEAR);
+        int month = currentDate.get(Calendar.MONTH);
+        int day = currentDate.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePicker = new DatePickerDialog(getActivity(), new OnDateSetListener() {
+            public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+
+                EditText fecha = (EditText) getActivity().findViewById(R.id.fechaPartido);
+                fecha.setText( selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear);
+            }
+        }, year, month, day);
+        datePicker.setTitle("Ingrese día");
+        datePicker.show();
+    }
+    public void mostrarReloj() {
+
+        Calendar calendar = Calendar.getInstance();
+        int hora = calendar.get(Calendar.HOUR_OF_DAY);
+        int minutos = calendar.get(Calendar.MINUTE);
+
+        TimePickerDialog timePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                EditText horario = (EditText) getActivity().findViewById(R.id.horaPartido);
+                horario.setText( hourOfDay + ":" + minute);
+
+            }
+
+        },hora,minutos,false);
+        timePicker.setTitle("Ingrese Horario");
+        timePicker.show();
+
+
+      /* //To show current date in the datepicker
         Calendar currentDate = Calendar.getInstance();
         int year = currentDate.get(Calendar.YEAR);
         int month = currentDate.get(Calendar.MONTH);
@@ -171,11 +221,11 @@ public class NuevoPartido extends Fragment {
         DatePickerDialog datePicker = new DatePickerDialog(getActivity(), new OnDateSetListener() {
             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                 // TODO Auto-generated method stub
-                    /*      Your code   to get date and time    */
+                    *//*      Your code   to get date and time    *//*
             }
         }, year, month, day);
         datePicker.setTitle("Select date");
-        datePicker.show();
+        datePicker.show();*/
     }
 }
 
