@@ -41,4 +41,8 @@
     <string name="pref_key_camera">Permita habilitar los permisos para que la aplicación pueda utilizar la cámara</string>
     <string name="pref_title_camera">Permitir uso de la cámara</string>
     <string name="profile_titulo">Perfil de Usuario</string>
+    <string name="cancha_row_ubicacion">Ubicación</string>
+    <string name="cancha_row_barrio">Barrio:</string>
+    <string name="linear_layout_manager">eliminar1</string>
+    <string name="grid_layout_manager">eliminar2</string>
 </resources>
