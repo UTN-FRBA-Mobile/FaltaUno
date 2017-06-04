@@ -23,9 +23,6 @@ public class CanchasFragmentAdapter extends RecyclerView.Adapter<CanchasFragment
 
     private List<Canchas> canchasList;
 
-    private String[] canchasTitulos = {"Cancha1","Cancha2","Cancha3","Cancha4"};
-    private String[] canchasUbicacion = {"Calle1","Calle2","Calle3","Calle4"};
-
     public CanchasFragmentAdapter(Context context, List<Canchas> canchasList) {
         layoutInflater = LayoutInflater.from(context);
         this.canchasList = canchasList;

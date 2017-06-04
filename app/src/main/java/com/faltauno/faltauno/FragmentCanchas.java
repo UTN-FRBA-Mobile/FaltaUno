@@ -67,19 +67,28 @@ public class FragmentCanchas extends Fragment {
     }
 
     private void prepareCanchasData() {
-        Canchas cancha = new Canchas("cancha1", "ubicacion1", R.drawable.messenger_bubble_large_blue);
+        Canchas cancha = new Canchas("Futbol Caballito", "Rivadavia 2000", R.drawable.messenger_bubble_large_blue);
         canchasList.add(cancha);
 
-        cancha = new Canchas("cancha2", "ubicacion2", R.drawable.messenger_bubble_large_blue);
+        cancha = new Canchas("Futbol Almagro", "Rivadavia 3000", R.drawable.messenger_bubble_large_blue);
         canchasList.add(cancha);
 
-        cancha = new Canchas("cancha3", "ubicacion3", R.drawable.messenger_bubble_large_blue);
+        cancha = new Canchas("Futbol Caballito 2", "Riglos 950", R.drawable.messenger_bubble_large_blue);
         canchasList.add(cancha);
 
-        cancha = new Canchas("cancha4", "ubicacion4" , R.drawable.messenger_bubble_large_blue);
+        cancha = new Canchas("Futbol Lugano I", "Escalada y Autopista" , R.drawable.messenger_bubble_large_blue);
         canchasList.add(cancha);
 
-        cancha = new Canchas("cancha5", "ubicacion5", R.drawable.messenger_bubble_large_blue);
+        cancha = new Canchas("Futbol Lugano II", "Mozart 2300", R.drawable.messenger_bubble_large_blue);
+        canchasList.add(cancha);
+
+        cancha = new Canchas("Futbol Caballito 3", "Riglos 950", R.drawable.messenger_bubble_large_blue);
+        canchasList.add(cancha);
+
+        cancha = new Canchas("Futbol Lugano III", "Escalada y Autopista" , R.drawable.messenger_bubble_large_blue);
+        canchasList.add(cancha);
+
+        cancha = new Canchas("Futbol Lugano IV", "Mozart 2300", R.drawable.messenger_bubble_large_blue);
         canchasList.add(cancha);
 
         canchasAdapter.notifyDataSetChanged();
