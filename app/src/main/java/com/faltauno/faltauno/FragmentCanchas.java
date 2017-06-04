@@ -67,28 +67,28 @@ public class FragmentCanchas extends Fragment {
     }
 
     private void prepareCanchasData() {
-        Canchas cancha = new Canchas("Futbol Caballito", "Rivadavia 2000", R.drawable.messenger_bubble_large_blue);
+        Canchas cancha = new Canchas("Futbol Caballito", "Rivadavia 2000", "Caballito", R.drawable.messenger_bubble_large_blue);
         canchasList.add(cancha);
 
-        cancha = new Canchas("Futbol Almagro", "Rivadavia 3000", R.drawable.messenger_bubble_large_blue);
+        cancha = new Canchas("Futbol Almagro", "Rivadavia 3000", "Almagro", R.drawable.messenger_bubble_large_blue);
         canchasList.add(cancha);
 
-        cancha = new Canchas("Futbol Caballito 2", "Riglos 950", R.drawable.messenger_bubble_large_blue);
+        cancha = new Canchas("Futbol Caballito 2", "Riglos 950", "Caballito", R.drawable.messenger_bubble_large_blue);
         canchasList.add(cancha);
 
-        cancha = new Canchas("Futbol Lugano I", "Escalada y Autopista" , R.drawable.messenger_bubble_large_blue);
+        cancha = new Canchas("Futbol Lugano I", "Escalada y Autopista", "Lugano" , R.drawable.messenger_bubble_large_blue);
         canchasList.add(cancha);
 
-        cancha = new Canchas("Futbol Lugano II", "Mozart 2300", R.drawable.messenger_bubble_large_blue);
+        cancha = new Canchas("Futbol Lugano II", "Mozart 2300", "Lugano", R.drawable.messenger_bubble_large_blue);
         canchasList.add(cancha);
 
-        cancha = new Canchas("Futbol Caballito 3", "Riglos 950", R.drawable.messenger_bubble_large_blue);
+        cancha = new Canchas("Futbol Caballito 3", "Riglos 950", "Caballito", R.drawable.messenger_bubble_large_blue);
         canchasList.add(cancha);
 
-        cancha = new Canchas("Futbol Lugano III", "Escalada y Autopista" , R.drawable.messenger_bubble_large_blue);
+        cancha = new Canchas("Futbol Lugano III", "Escalada y Autopista", "Lugano" , R.drawable.messenger_bubble_large_blue);
         canchasList.add(cancha);
 
-        cancha = new Canchas("Futbol Lugano IV", "Mozart 2300", R.drawable.messenger_bubble_large_blue);
+        cancha = new Canchas("Futbol Lugano IV", "Mozart 2300", "Lugano", R.drawable.messenger_bubble_large_blue);
         canchasList.add(cancha);
 
         canchasAdapter.notifyDataSetChanged();

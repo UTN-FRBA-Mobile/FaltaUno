@@ -5,37 +5,47 @@ package com.faltauno.faltauno;
  */
 
 public class Canchas {
-    public String title;
-    public String description;
+    public String nombre;
+    public String ubicacion;
+    public String barrio;
     public int imageId;
 
-    Canchas(String title, String description, int imageId) {
-        this.title = title;
-        this.description = description;
+    Canchas(String nombre, String ubicacion, String barrio, int imageId) {
+        this.nombre = nombre;
+        this.ubicacion = ubicacion;
+        this.barrio = barrio;
         this.imageId = imageId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public void setImageId(int imageId) {
         this.imageId = imageId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setBarrio(String barrio) {
+        this.barrio = barrio;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
     public int getImageId() {
         return imageId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getBarrio() {
+        return barrio;
     }
 
-    public String getTitle() {
-        return title;
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
     }
 }
