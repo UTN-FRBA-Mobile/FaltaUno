@@ -4,4 +4,8 @@
     <dimen name="titulo_row">20dp</dimen>
     <dimen name="fila_row">14dp</dimen>
     <dimen name="separador_row">72dp</dimen>
+    <dimen name="separador_fila">5dp</dimen>
+    <dimen name="titulo">30dp</dimen>
+    <dimen name="editText">20dp</dimen>
+    <dimen name="buttonText">15dp</dimen>
 </resources>

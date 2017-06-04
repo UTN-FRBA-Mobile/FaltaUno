@@ -45,4 +45,14 @@
     <string name="cancha_row_barrio">Barrio:</string>
     <string name="linear_layout_manager">eliminar1</string>
     <string name="grid_layout_manager">eliminar2</string>
+    <string name="crear_cancha_titulo">Crear Cancha</string>
+    <string name="crear_cancha_cant_jugadores">Selecciona la cantidad de jugadores</string>
+    <string name="crear_cancha_ubicacion">Ingresa Ubicacion</string>
+    <string name="crear_cancha_agregar_foto">Agrega una foto de la cancha</string>
+    <string name="crear_cancha_button_ok">Crear Cancha!</string>
+    <string-array name="cant_jugadores_array">
+        <item>5</item>
+        <item>7</item>
+        <item>11</item>
+    </string-array>
 </resources>

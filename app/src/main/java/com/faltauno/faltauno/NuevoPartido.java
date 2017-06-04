@@ -1,20 +1,57 @@
 package com.faltauno.faltauno;
 
-import android.content.Context;
-import android.net.Uri;
+
+import android.app.Dialog;
+import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+//import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
+//import android.support.v4.app.FragmentTransaction;
 
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.RelativeLayout;
+import android.app.DialogFragment;
+import java.util.Calendar;
+
+import android.widget.DatePicker;
+import android.app.DatePickerDialog;
+import android.widget.EditText;
+import android.app.Activity;
+import android.view.View;
+import android.app.DialogFragment;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.os.Bundle;
+import android.text.InputType;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TimePicker;
+
+
+import static com.faltauno.faltauno.R.id.fechaPartido;
 import static com.faltauno.faltauno.R.id.numeroJugadores;
 
 public class NuevoPartido extends Fragment {
@@ -28,6 +65,9 @@ public class NuevoPartido extends Fragment {
     private String mParam2;
     public NumberPicker np;
     public Spinner spinner;
+
+
+
 
 
     //private OnFragmentInteractionListener mListener;
@@ -58,12 +98,10 @@ public class NuevoPartido extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
 
-
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
 
 
 //        String[] nums = new String[20];
@@ -84,9 +122,9 @@ public class NuevoPartido extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View vista =inflater.inflate(R.layout.fragment_nuevo_partido, container, false);
+        View vista = inflater.inflate(R.layout.fragment_nuevo_partido, container, false);
         //Asocio el NumberPicker con el xml
-        np = (NumberPicker) vista.findViewById (R.id.numeroJugadores);
+        np = (NumberPicker) vista.findViewById(R.id.numeroJugadores);
         //Le asigno vaor mínimo y máximo
         np.setMinValue(1);
         np.setMaxValue(20);
@@ -99,36 +137,35 @@ public class NuevoPartido extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+
+        // Para datePicker
+        final LinearLayout ll = (LinearLayout) vista.findViewById(R.id.l1);
+        EditText fechaPartido = (EditText) vista.findViewById(R.id.fechaPartido);
+
+        fechaPartido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarCalendario();
+            }
+
+
+        });
+        //Para timePicker
+        EditText horaPartido = (EditText) vista.findViewById(R.id.horaPartido);
+
+        horaPartido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarReloj();
+            }
+
+
+        });
+
+
         return vista;
 
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-/*
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-*/
-
-   // @Override
- /*   public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }*/
-
-  /*  @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }*/
-
     public static Fragment newInstance(String texto) {
 
         NuevoPartido fragment = new NuevoPartido();
@@ -138,22 +175,60 @@ public class NuevoPartido extends Fragment {
         return fragment;
     }
 
+    public void mostrarCalendario() {
+
+        Calendar currentDate = Calendar.getInstance();
+        int year = currentDate.get(Calendar.YEAR);
+        int month = currentDate.get(Calendar.MONTH);
+        int day = currentDate.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePicker = new DatePickerDialog(getActivity(), new OnDateSetListener() {
+            public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+
+                EditText fecha = (EditText) getActivity().findViewById(R.id.fechaPartido);
+                fecha.setText( selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear);
+            }
+        }, year, month, day);
+        datePicker.setTitle("Ingrese día");
+        datePicker.show();
+    }
+    public void mostrarReloj() {
+
+        Calendar calendar = Calendar.getInstance();
+        int hora = calendar.get(Calendar.HOUR_OF_DAY);
+        int minutos = calendar.get(Calendar.MINUTE);
+
+        TimePickerDialog timePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                EditText horario = (EditText) getActivity().findViewById(R.id.horaPartido);
+                horario.setText( hourOfDay + ":" + minute);
+
+            }
+
+        },hora,minutos,false);
+        timePicker.setTitle("Ingrese Horario");
+        timePicker.show();
 
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-/*    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }*/
+      /* //To show current date in the datepicker
+        Calendar currentDate = Calendar.getInstance();
+        int year = currentDate.get(Calendar.YEAR);
+        int month = currentDate.get(Calendar.MONTH);
+        int day = currentDate.get(Calendar.DAY_OF_MONTH);
 
-
+        DatePickerDialog datePicker = new DatePickerDialog(getActivity(), new OnDateSetListener() {
+            public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+                // TODO Auto-generated method stub
+                    *//*      Your code   to get date and time    *//*
+            }
+        }, year, month, day);
+        datePicker.setTitle("Select date");
+        datePicker.show();*/
+    }
 }
+
+
+
+
