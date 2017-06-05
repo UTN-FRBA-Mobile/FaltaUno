@@ -51,6 +51,8 @@ dependencies {
     compile 'com.google.firebase:firebase-database:9.6.1'
     testCompile 'junit:junit:4.12'
     compile project(':facebook-android-sdk-4.22.1')
+
+
 }
 
 apply plugin: 'com.google.gms.google-services'
