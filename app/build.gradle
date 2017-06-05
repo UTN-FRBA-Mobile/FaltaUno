@@ -48,6 +48,9 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.google.firebase:firebase-database:9.6.1'
     testCompile 'junit:junit:4.12'
     compile project(':facebook-android-sdk-4.22.1')
 }
+
+apply plugin: 'com.google.gms.google-services'
