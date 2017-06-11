@@ -32,7 +32,7 @@ public class CustomFragmentPagerAdapter extends FragmentPagerAdapter {
             case 2:
                 return FragmentCanchas.newInstance(texto);
     }
-        return FragmentProxPartidos.newInstance(texto);
+        return FragmentCanchas.newInstance(texto);
     }
 
     @Override
