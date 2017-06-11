@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 //import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,42 +49,40 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+//IMPORTS PARA FIREBASE
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import static com.faltauno.faltauno.R.id.fechaPartido;
-import static com.faltauno.faltauno.R.id.numeroJugadores;
+import org.w3c.dom.Text;
+
 
 public class NuevoPartido extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     public NumberPicker np;
     public Spinner spinner;
 
+    // PRUEBA FIREBASE https://prueba-8de78.firebaseio.com/canchas
+
+    //FirebaseDatabase database = FirebaseDatabase.getInstance();
+    //DatabaseReference myRef = database.getReference("canchas");
 
 
-
-
-    //private OnFragmentInteractionListener mListener;
+    // FIN PRUEBA
 
     public NuevoPartido() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NuevoPartido.
-     */
 
     public static NuevoPartido newInstance(String param1, String param2) {
         NuevoPartido fragment = new NuevoPartido();
@@ -100,8 +99,8 @@ public class NuevoPartido extends Fragment {
 
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+         //   mParam1 = getArguments().getString(ARG_PARAM1);
+           // mParam2 = getArguments().getString(ARG_PARAM2);
 
 
 //        String[] nums = new String[20];
@@ -122,12 +121,17 @@ public class NuevoPartido extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View vista = inflater.inflate(R.layout.fragment_nuevo_partido, container, false);
+        final View vista = inflater.inflate(R.layout.fragment_nuevo_partido, container, false);
+        //Toast.makeText(getActivity(), "Arrancando la vistaa", Toast.LENGTH_SHORT).show();
+
+
+
         //Asocio el NumberPicker con el xml
         np = (NumberPicker) vista.findViewById(R.id.numeroJugadores);
         //Le asigno vaor mínimo y máximo
         np.setMinValue(1);
         np.setMaxValue(20);
+
         //Armo el Spinner de canchas
         spinner = (Spinner) vista.findViewById(R.id.spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -137,6 +141,12 @@ public class NuevoPartido extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+
+        //SPINNER CON FIREBASE
+
+
+
+        //FIN
 
         // Para datePicker
         final LinearLayout ll = (LinearLayout) vista.findViewById(R.id.l1);
@@ -162,6 +172,43 @@ public class NuevoPartido extends Fragment {
 
         });
 
+        //PRUEBA FIREBASE
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("canchas")
+                .child("1").child("nombre");
+
+        //TextView prueba = (TextView) vista.findViewById(R.id.textView2);
+        //String valor = snapshot.getValue().toString();
+        //prueba.setText("HOLA");
+
+
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+
+                //PARA VER SI LEVANTO DE LA BD, LO QUE HAGO ES PISAR EL TÍTULO
+                //DE NUEVO PARTIDO, CON EL NOMBRE DE LA PRIMER CANCHA QUE CARGUÉ EN MI BASE
+                
+                TextView prueba = (TextView) vista.findViewById(R.id.textView2);
+                String valor = snapshot.getValue().toString();
+                prueba.setText(valor);
+
+
+               // prueba.setText(snapshot.getValue().toString());
+
+               /* for (DataSnapshot msgSnapshot: snapshot.getChildren()) {
+                    Cancha msg = msgSnapshot.getValue(Cancha.class);
+                    Toast.makeText(getActivity(), snapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
+                    //Log.i("Chat", msg.getName()+": ");//+msg.getText());
+
+                }*/
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                //Log.e("Chat", "The read failed: " + error.getText());
+            }
+        });
 
         return vista;
 
