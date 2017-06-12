@@ -71,15 +71,7 @@ public class NuevoPartido extends Fragment {
 
     public NumberPicker np;
     public Spinner spinner;
-
-    // PRUEBA FIREBASE https://prueba-8de78.firebaseio.com/canchas
-
-    //FirebaseDatabase database = FirebaseDatabase.getInstance();
-    //DatabaseReference myRef = database.getReference("canchas");
-
-
-    // FIN PRUEBA
-
+    
     public NuevoPartido() {
         // Required empty public constructor
     }
@@ -96,35 +88,17 @@ public class NuevoPartido extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-         //   mParam1 = getArguments().getString(ARG_PARAM1);
-           // mParam2 = getArguments().getString(ARG_PARAM2);
-
-
-//        String[] nums = new String[20];
-//        for(int i=0; i<nums.length; i++)
-//            nums[i] = Integer.toString(i);
-//
-//        np.setMinValue(1);
-//        np.setMaxValue(20);
-//        np.setWrapSelectorWheel(false);
-//        np.setDisplayedValues(nums);
-//        np.setValue(1);
-
 
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View vista = inflater.inflate(R.layout.fragment_nuevo_partido, container, false);
         //Toast.makeText(getActivity(), "Arrancando la vistaa", Toast.LENGTH_SHORT).show();
-
-
 
         //Asocio el NumberPicker con el xml
         np = (NumberPicker) vista.findViewById(R.id.numeroJugadores);
@@ -142,16 +116,9 @@ public class NuevoPartido extends Fragment {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-        //SPINNER CON FIREBASE
-
-
-
-        //FIN
-
         // Para datePicker
         final LinearLayout ll = (LinearLayout) vista.findViewById(R.id.l1);
         EditText fechaPartido = (EditText) vista.findViewById(R.id.fechaPartido);
-
         fechaPartido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,9 +127,9 @@ public class NuevoPartido extends Fragment {
 
 
         });
+
         //Para timePicker
         EditText horaPartido = (EditText) vista.findViewById(R.id.horaPartido);
-
         horaPartido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,13 +141,7 @@ public class NuevoPartido extends Fragment {
 
         //PRUEBA FIREBASE
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("canchas")
-                .child("1").child("nombre");
-
-        //TextView prueba = (TextView) vista.findViewById(R.id.textView2);
-        //String valor = snapshot.getValue().toString();
-        //prueba.setText("HOLA");
-
-
+                .child("c1").child("nombre");
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -257,22 +218,6 @@ public class NuevoPartido extends Fragment {
         },hora,minutos,false);
         timePicker.setTitle("Ingrese Horario");
         timePicker.show();
-
-
-      /* //To show current date in the datepicker
-        Calendar currentDate = Calendar.getInstance();
-        int year = currentDate.get(Calendar.YEAR);
-        int month = currentDate.get(Calendar.MONTH);
-        int day = currentDate.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePicker = new DatePickerDialog(getActivity(), new OnDateSetListener() {
-            public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
-                // TODO Auto-generated method stub
-                    *//*      Your code   to get date and time    *//*
-            }
-        }, year, month, day);
-        datePicker.setTitle("Select date");
-        datePicker.show();*/
     }
 }
 
