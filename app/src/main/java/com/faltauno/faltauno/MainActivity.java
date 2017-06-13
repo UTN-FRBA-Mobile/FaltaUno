@@ -56,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
             String email = user.getEmail();
             Uri photoUrl = user.getPhotoUrl();
             String uid = user.getUid();
-            Log.i(TAG, "el nombre es: " + name + " y el email es: " + email + " y el uid es : " + uid);
-            Toast.makeText(getApplicationContext(), user.getDisplayName(), Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(), user.getEmail(), Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(), user.getUid(), Toast.LENGTH_LONG).show();
+//            Log.i(TAG, "el nombre es: " + name + " y el email es: " + email + " y el uid es : " + uid);
+//            Toast.makeText(getApplicationContext(), user.getDisplayName(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), user.getEmail(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), user.getUid(), Toast.LENGTH_LONG).show();
         } else {
             andaYLogueate();
         }
