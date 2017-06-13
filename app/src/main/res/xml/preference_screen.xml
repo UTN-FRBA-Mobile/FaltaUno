@@ -16,4 +16,12 @@
             android:title="@string/pref_title_history"
             android:defaultValue="false"/>
     </PreferenceCategory>
+    <PreferenceCategoryAboutDialogFragment
+        android:key="pref_key_cammera_settings">
+        <SwitchPreference
+            android:key="pref_key_camera"
+            android:summary="@string/pref_key_camera"
+            android:title="@string/pref_title_camera"
+            android:defaultValue="false"/>
+    </PreferenceCategoryAboutDialogFragment>
 </PreferenceScreen>

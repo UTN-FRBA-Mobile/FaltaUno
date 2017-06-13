@@ -1,0 +1,140 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.faltauno.faltauno.NuevoPartido">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:baselineAligned="false">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:layout_marginTop="@dimen/text_margin"
+            android:text="@string/crear_cancha_titulo"
+            android:textSize="@dimen/titulo"
+            android:textColor="@color/black"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separador_fila"
+            android:background="@android:color/holo_orange_light"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"/>
+
+        <EditText
+            android:id="@+id/crearCanchaNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="Nombre de la Cancha"
+            android:textSize="@dimen/editText"
+            android:focusable="false"
+            android:clickable="true"
+            android:layout_margin="@dimen/text_margin"
+            android:maxLines="1"
+        />
+
+        <Switch
+            android:id="@+id/crearCanchaCesped"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="¿Cancha de cesped?"
+            android:textSize="@dimen/editText"
+            android:layout_margin="@dimen/text_margin"
+            android:checked="false"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crear_cancha_cant_jugadores"
+                android:layout_margin="@dimen/text_margin"
+                android:textSize="@dimen/editText"
+                android:textColor="@color/black"
+                android:gravity="center"/>
+            <Spinner
+                android:id="@+id/crearCanchaCantJug"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin">
+            </Spinner>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crear_cancha_ubicacion"
+                android:layout_margin="@dimen/text_margin"
+                android:textSize="@dimen/editText"
+                android:textColor="@color/black"
+                android:textAlignment="viewStart"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:src="@mipmap/ic_ubicacion"
+                android:background="@color/hueso"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/crear_cancha_agregar_foto"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/editText"
+            android:layout_margin="@dimen/editText"/>
+
+        <ImageButton
+            android:id="@+id/crearCanchaAgregarFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@mipmap/ic_launcher_round"
+            android:background="@android:color/holo_orange_light"
+            android:layout_gravity="center"
+            android:visibility="visible"/>
+        <ImageView
+            android:id="@+id/crearCanchaFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_margin="@dimen/editText"
+            android:layout_gravity="center"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/editText"
+            android:layout_gravity="center"
+            android:text="@string/crear_cancha_button_ok"
+            android:textSize="@dimen/buttonText"
+            android:backgroundTint="@color/verde_azulado_oscuro"
+            android:textColor="@color/hueso"/>
+    </LinearLayout>
+
+</ScrollView>

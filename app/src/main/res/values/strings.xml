@@ -3,9 +3,9 @@
     <string name="app_name">Falta Uno</string>
     <string name="action_settings">Ajustes</string>
     <string name="action_profile">Perfil</string>
-    <string name="action_about">Acerca de</string>
+    <string name="action_about">Acerca de...</string>
     <string name="search_title">Buscar</string>
-    <string name="search_hint">Partido</string>
+    <string name="search_hint">Partido...</string>
     <string name="about_version">Falta Uno V1.0</string>
     <string name="action_disconnect">Desconectarse</string>
     <string name="button_OK">ACEPTAR</string>
@@ -16,6 +16,16 @@
     <string name="detalle_partido_dur">Duración</string>
     <string name="detalle_partido_precio">Precio:</string>
     <string name="detalle_partido_anfitrion">Anfitrion</string>
+    <string name="nuevo_partido_titulo">Nuevo Partido</string>
+    //Hardcodeo strings para canchas
+    <string-array name="canchas_array">
+        <item>Elegí la cancha...</item>
+        <item>cancha 1</item>
+        <item>cancha 2</item>
+        <item>cancha 3</item>
+        <item>cancha 4</item>
+        <item>cancha 5</item>
+    </string-array>
     <string name="pref_summary_location">Deshabilita la opción de compartir ubicación</string>
     <string name="pref_title_location">Compartir Ubicación</string>
     <string name="pref_summary_history">Permite guardar el historial de los partidos en los cuales participo</string>
@@ -28,4 +38,22 @@
     <string name="ajustes_title">Ajustes</string>
     <string name="perfil_hist_jugados">Jugados:</string>
     <string name="perfil_hist_creados">Creados:</string>
+    <string name="firebase_error_login">Error en el inicio de sesión</string>
+    <string name="pref_key_camera">Permita habilitar los permisos para que la aplicación pueda utilizar la cámara</string>
+    <string name="pref_title_camera">Permitir uso de la cámara</string>
+    <string name="profile_titulo">Perfil de Usuario</string>
+    <string name="cancha_row_ubicacion">Ubicación</string>
+    <string name="cancha_row_barrio">Barrio:</string>
+    <string name="linear_layout_manager">eliminar1</string>
+    <string name="grid_layout_manager">eliminar2</string>
+    <string name="crear_cancha_titulo">Crear Cancha</string>
+    <string name="crear_cancha_cant_jugadores">Selecciona la cantidad de jugadores</string>
+    <string name="crear_cancha_ubicacion">Ingresa Ubicacion</string>
+    <string name="crear_cancha_agregar_foto">Agrega una foto de la cancha</string>
+    <string name="crear_cancha_button_ok">Crear Cancha!</string>
+    <string-array name="cant_jugadores_array">
+        <item>5</item>
+        <item>7</item>
+        <item>11</item>
+    </string-array>
 </resources>

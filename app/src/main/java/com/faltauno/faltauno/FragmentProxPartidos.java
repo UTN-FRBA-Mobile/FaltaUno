@@ -2,6 +2,7 @@ package com.faltauno.faltauno;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,7 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.faltauno.faltauno.dummy.DummyContent;
 import com.faltauno.faltauno.dummy.DummyContent.DummyItem;
@@ -21,6 +24,8 @@ import java.util.List;
  * Created by Exequiel 07/05/17
  */
 public class FragmentProxPartidos extends Fragment {
+    ListView listaPartidos;
+    ArrayAdapter<String> listaPartidosAdapter;
 
     // TODO: Customize parameter argument names
     private static final String ARG_PARAM1 = "param1";
@@ -28,7 +33,6 @@ public class FragmentProxPartidos extends Fragment {
     private String mParam1;
 
     private RecyclerView recyclerView;
-
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -51,7 +55,7 @@ public class FragmentProxPartidos extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
+                if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
         }
     }
@@ -64,9 +68,17 @@ public class FragmentProxPartidos extends Fragment {
 
 public void onViewCreated (View view, @Nullable Bundle savedInstanceState){
     super.onViewCreated(view, savedInstanceState);
+
+    FloatingActionButton fab1 = (FloatingActionButton) view.findViewById(R.id.fab);
+    fab1.setOnClickListener(new View.OnClickListener(){
+        public void onClick (View v){
+//llamar el fragment de Vane para Crear Partido
+        }
+    });
     recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
     recyclerView.setAdapter(new OtroAdapter(getContext(),mParam1));
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
 }
 
 }
