@@ -38,4 +38,5 @@
     <string name="ajustes_title">Ajustes</string>
     <string name="perfil_hist_jugados">Jugados:</string>
     <string name="perfil_hist_creados">Creados:</string>
+    <string name="firebase_error_login">Error en el inicio de sesión</string>
 </resources>

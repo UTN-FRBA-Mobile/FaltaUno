@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,7 +47,8 @@ public class OtroAdapter extends RecyclerView.Adapter<OtroAdapter.ViewHolder>{
 
     public OtroAdapter(Context context, String texto) {
         //layoutInflater = LayoutInflater.from(context);
-        this.items=items;
+//        this.items=items;
+        this.items = new ArrayList<Partidos>();
     }
 
     @Override
