@@ -28,11 +28,11 @@ public class CustomFragmentPagerAdapter extends FragmentPagerAdapter {
         //Por default devuelvo siempre el de proximos partidos
         switch (position) {
             case 1:
-                return PageFragment.newInstance(position + 1);
+                return PageFragment.newInstance(position);
             case 2:
-                return NuevoPartido.newInstance(texto);
+                return FragmentCanchas.newInstance(texto);
     }
-        return FragmentProxPartidos.newInstance(texto);
+        return FragmentCanchas.newInstance(texto);
     }
 
     @Override
