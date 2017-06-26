@@ -38,6 +38,7 @@
     <string name="ajustes_title">Ajustes</string>
     <string name="perfil_hist_jugados">Jugados:</string>
     <string name="perfil_hist_creados">Creados:</string>
+    <string name="firebase_error_login">Error en el inicio de sesión</string>
     <string name="pref_key_camera">Permita habilitar los permisos para que la aplicación pueda utilizar la cámara</string>
     <string name="pref_title_camera">Permitir uso de la cámara</string>
     <string name="profile_titulo">Perfil de Usuario</string>

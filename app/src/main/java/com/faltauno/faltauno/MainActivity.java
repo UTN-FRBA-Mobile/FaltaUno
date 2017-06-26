@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,9 @@ import android.view.View;
 
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -33,19 +37,32 @@ import static android.R.id.message;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "Info de Usuario";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (AccessToken.getCurrentAccessToken() == null) {
-            andaYLogueate();
-        }
-
         //Visualizacion del menu de la toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
+            String uid = user.getUid();
+//            Log.i(TAG, "el nombre es: " + name + " y el email es: " + email + " y el uid es : " + uid);
+//            Toast.makeText(getApplicationContext(), user.getDisplayName(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), user.getEmail(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), user.getUid(), Toast.LENGTH_LONG).show();
+        } else {
+            andaYLogueate();
+        }
 
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -102,12 +119,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void action_disconnects(MenuItem item){
-    LoginManager.getInstance().logOut();
-    andaYLogueate();
+        FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
+        andaYLogueate();
     }
 
     //cneira84 - metodo llamado por el menu definido en menu_main.xml
     public void action_search(MenuItem item) {
     }
+//    public void logout(View view) {
+//        FirebaseAuth.getInstance().signOut();
+//        LoginManager.getInstance().logOut();
+//        andaYLogueate();
+//    }
 }
 

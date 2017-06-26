@@ -1,6 +1,7 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="smallTxtSize">8sp</dimen>
     <dimen name="titulo_row">20dp</dimen>
     <dimen name="fila_row">14dp</dimen>
     <dimen name="separador_row">72dp</dimen>

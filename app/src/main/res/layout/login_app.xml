@@ -1,24 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Login Status"
-        android:id="@+id/login_status"
-        android:gravity="center"
-        android:textStyle="bold"/>
-
-    <com.facebook.login.widget.LoginButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fb_login_btn"
-        android:layout_centerInParent="true">
-
-    </com.facebook.login.widget.LoginButton>
-
-
-</RelativeLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    android:gravity="center_vertical|center_horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:id="@+id/editTextEmail">
+            <!--android:weightSum="0.5">-->
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:id="@+id/etEmailAddr"
+                android:hint="Email"
+                android:layout_marginTop="10dp"
+                android:textSize="30dp"/>
+                <!--android:layout_weight="0.5"-->
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:id="@+id/editTextPass">
+            <!--android:weightSum="0.5"-->
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:id="@+id/etPassword"
+                android:hint="Password"
+                android:layout_marginTop="10dp"
+                android:textSize="30dp"/>
+                <!--android:layout_weight="0.5"/>-->
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:id="@+id/layoutBtnSignIn">
+            <!--android:weightSum="0.5">-->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LOG IN"
+                android:id="@+id/btnSignIn"
+                android:layout_marginTop="10dp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CREATE ACCOUNT"
+                android:id="@+id/btnCreate"
+                android:layout_marginTop="10dp"/>
+                <!--android:layout_weight="0.5"/>-->
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:id="@+id/layoutBtnFace"
+            android:layout_marginTop="10dp">
+            <!--android:weightSum="0.5">-->
+            <com.facebook.login.widget.LoginButton
+                xmlns:facebook="http://schemas.android.com/apk/res-auto"
+                facebook:com_facebook_login_text="LOG IN WITH FACEBOOK"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fb_login_btn"
+                android:layout_marginTop="10dp">
+                <!--android:layout_weight="0.5">-->
+            </com.facebook.login.widget.LoginButton>
+        </LinearLayout>
+</LinearLayout>
