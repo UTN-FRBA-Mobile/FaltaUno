@@ -1,7 +1,6 @@
 package com.faltauno.faltauno;
 
 import android.content.Context;
-import android.support.annotation.StringDef;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,7 @@ import java.util.List;
 
 public class OtroAdapter extends RecyclerView.Adapter<OtroAdapter.ViewHolder>{
 
-    private List<Partidos> items;
+    private List<Partido> items;
     private LayoutInflater layoutInflater;
     private String texto;
 
@@ -48,7 +47,7 @@ public class OtroAdapter extends RecyclerView.Adapter<OtroAdapter.ViewHolder>{
     public OtroAdapter(Context context, String texto) {
         //layoutInflater = LayoutInflater.from(context);
 //        this.items=items;
-        this.items = new ArrayList<Partidos>();
+        this.items = new ArrayList<Partido>();
     }
 
     @Override
@@ -73,7 +72,8 @@ public class OtroAdapter extends RecyclerView.Adapter<OtroAdapter.ViewHolder>{
         holder.imagen.setImageResource(items.get(position).getImagen());
         holder.nombrePartido.setText(items.get(position).getnombrePartido());
         holder.cancha.setText(items.get(position).getCancha());
-        holder.fechaHora.setText(items.get(position).getFechaHoraPartido());
+        //CAMBIO EL HOLDER DE FECHA HORA, CONCATENO PARA MANTENER CONSISTENCIA CON LOS GETTERS Y SETTERS DE CLASE PARTIDO
+        holder.fechaHora.setText(items.get(position).getFechaPartido()+", "+items.get(position).getHoraPartido());
         holder.creadoPor.setText(items.get(position).getCreadoPor());
         holder.jugadores.setText(items.get(position).getJugadoresFaltantes());
         holder.nombrePartido.setText(items.get(position).getnombrePartido());
