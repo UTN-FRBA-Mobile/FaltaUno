@@ -6,8 +6,8 @@ package com.faltauno.faltauno;
 
 public class Cancha {
 
-    private String Unombre;
-    private String Udireccion;
+    public String nombre;
+    public String direccion;
    // private String Uid;
 
     public Cancha() {
@@ -15,24 +15,24 @@ public class Cancha {
     }
 
     public Cancha(String nombre, String direccion) {
-        Unombre = nombre;
-        Udireccion = direccion;
+        this.nombre = nombre;
+        this.direccion = direccion;
     }
 
     public String getName() {
-        return Unombre;
+        return nombre;
     }
 
     public void setName(String nombre) {
-        Unombre = nombre;
+        this.nombre = nombre;
     }
 
     public String getDire() {
-        return Udireccion;
+        return direccion;
     }
 
     public void setDire(String direccion) {
-        Udireccion = direccion;
+        this.direccion = direccion;
     }
 
 //    public String getUid() {

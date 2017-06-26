@@ -27,6 +27,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 import android.app.DialogFragment;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.widget.DatePicker;
@@ -71,15 +73,8 @@ public class NuevoPartido extends Fragment {
 
     public NumberPicker np;
     public Spinner spinner;
-
-    // PRUEBA FIREBASE https://prueba-8de78.firebaseio.com/canchas
-
-    //FirebaseDatabase database = FirebaseDatabase.getInstance();
-    //DatabaseReference myRef = database.getReference("canchas");
-
-
-    // FIN PRUEBA
-
+    public ArrayList spinnerList;
+    
     public NuevoPartido() {
         // Required empty public constructor
     }
@@ -96,27 +91,11 @@ public class NuevoPartido extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-         //   mParam1 = getArguments().getString(ARG_PARAM1);
-           // mParam2 = getArguments().getString(ARG_PARAM2);
-
-
-//        String[] nums = new String[20];
-//        for(int i=0; i<nums.length; i++)
-//            nums[i] = Integer.toString(i);
-//
-//        np.setMinValue(1);
-//        np.setMaxValue(20);
-//        np.setWrapSelectorWheel(false);
-//        np.setDisplayedValues(nums);
-//        np.setValue(1);
-
 
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -124,34 +103,25 @@ public class NuevoPartido extends Fragment {
         final View vista = inflater.inflate(R.layout.fragment_nuevo_partido, container, false);
         //Toast.makeText(getActivity(), "Arrancando la vistaa", Toast.LENGTH_SHORT).show();
 
-
-
         //Asocio el NumberPicker con el xml
         np = (NumberPicker) vista.findViewById(R.id.numeroJugadores);
         //Le asigno vaor mínimo y máximo
         np.setMinValue(1);
         np.setMaxValue(20);
 
-        //Armo el Spinner de canchas
-        spinner = (Spinner) vista.findViewById(R.id.spinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(vista.getContext(),
-                R.array.canchas_array, android.R.layout.simple_spinner_item);
+
+
+
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(vista.getContext(),
+//                R.array.canchas_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-
-        //SPINNER CON FIREBASE
-
-
-
-        //FIN
+        //spinner.setAdapter(adapter);
 
         // Para datePicker
         final LinearLayout ll = (LinearLayout) vista.findViewById(R.id.l1);
         EditText fechaPartido = (EditText) vista.findViewById(R.id.fechaPartido);
-
         fechaPartido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,9 +130,9 @@ public class NuevoPartido extends Fragment {
 
 
         });
+
         //Para timePicker
         EditText horaPartido = (EditText) vista.findViewById(R.id.horaPartido);
-
         horaPartido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,36 +143,32 @@ public class NuevoPartido extends Fragment {
         });
 
         //PRUEBA FIREBASE
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("canchas")
-                .child("1").child("nombre");
-
-        //TextView prueba = (TextView) vista.findViewById(R.id.textView2);
-        //String valor = snapshot.getValue().toString();
-        //prueba.setText("HOLA");
-
-
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("canchas");
+              //  .child("c1").child("nombre");
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
-
-                //PARA VER SI LEVANTO DE LA BD, LO QUE HAGO ES PISAR EL TÍTULO
-                //DE NUEVO PARTIDO, CON EL NOMBRE DE LA PRIMER CANCHA QUE CARGUÉ EN MI BASE
-                
-                TextView prueba = (TextView) vista.findViewById(R.id.textView2);
+               /* TextView prueba = (TextView) vista.findViewById(R.id.textView2);
                 String valor = snapshot.getValue().toString();
-                prueba.setText(valor);
+                prueba.setText(valor);*/
 
+               ArrayList spinnerList = new ArrayList();
+               for (DataSnapshot canchaSnapshot: snapshot.getChildren()) {
+                   Cancha cancha = canchaSnapshot.getValue(Cancha.class);
+                   //cancha.setName(snapshot.getValue().toString());
+                    //Toast.makeText(getActivity(), snapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
+                  //Toast.makeText(getActivity(), canchaSnapshot.child("nombre").getValue().toString(), Toast.LENGTH_SHORT).show();
+                    spinnerList.add(canchaSnapshot.child("nombre").getValue().toString());
+                }
 
-               // prueba.setText(snapshot.getValue().toString());
+                //Armo el Spinner de canchas
+                spinner = (Spinner) vista.findViewById(R.id.spinner);
+                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(vista.getContext(),android.R.layout.simple_spinner_item, spinnerList);
+                spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(spinnerArrayAdapter);
 
-               /* for (DataSnapshot msgSnapshot: snapshot.getChildren()) {
-                    Cancha msg = msgSnapshot.getValue(Cancha.class);
-                    Toast.makeText(getActivity(), snapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
-                    //Log.i("Chat", msg.getName()+": ");//+msg.getText());
-
-                }*/
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -257,22 +223,6 @@ public class NuevoPartido extends Fragment {
         },hora,minutos,false);
         timePicker.setTitle("Ingrese Horario");
         timePicker.show();
-
-
-      /* //To show current date in the datepicker
-        Calendar currentDate = Calendar.getInstance();
-        int year = currentDate.get(Calendar.YEAR);
-        int month = currentDate.get(Calendar.MONTH);
-        int day = currentDate.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePicker = new DatePickerDialog(getActivity(), new OnDateSetListener() {
-            public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
-                // TODO Auto-generated method stub
-                    *//*      Your code   to get date and time    *//*
-            }
-        }, year, month, day);
-        datePicker.setTitle("Select date");
-        datePicker.show();*/
     }
 }
 
