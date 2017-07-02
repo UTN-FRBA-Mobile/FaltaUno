@@ -6,40 +6,43 @@ package com.faltauno.faltauno;
 
 public class Cancha {
 
-    public String nombre;
-    public String direccion;
+    private String nombre;
+    private String direccion;
+    private int imagen;
    // private String Uid;
 
     public Cancha() {
         // Needed for Firebase
     }
 
-    public Cancha(String nombre, String direccion) {
+    public Cancha(String nombre, String direccion, int imagen) {
         this.nombre = nombre;
         this.direccion = direccion;
+        this.imagen=imagen;
     }
 
-    public String getName() {
+  public String getNombre() {
         return nombre;
     }
 
-    public void setName(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public String getDire() {
+    public String getDireccion() {
         return direccion;
     }
 
-    public void setDire(String direccion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
+   }
+
+    public int getImagen() {
+        return imagen;
     }
 
-//    public String getUid() {
-//        return mUid;
-//    }
-//
-//    public void setUid(String uid) {
-//        mUid = uid;
-//    }
+    public void setImagen(int imagen) {
+        this.imagen = imagen;
+    }
+
 }
