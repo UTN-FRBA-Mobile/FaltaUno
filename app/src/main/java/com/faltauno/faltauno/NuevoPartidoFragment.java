@@ -188,8 +188,8 @@ public class NuevoPartidoFragment extends Fragment {
         host = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
         fecha = fechaPartido.getText().toString();
         hora = horaPartido.getText().toString();
-        Partido nuevoPartido = new Partido(nombre,faltantes,cancha,
-                host,fecha,img,hora);
+        Long jfaltantes = new Long(faltantes); //TODO: Ver con Vane la clase genérica
+        Partido nuevoPartido = new Partido(nombre, jfaltantes,cancha, host,fecha,img,hora);
 
         //GRABO PARTIDO NUEVO
         DatabaseReference partidos = FirebaseDatabase.getInstance().getReference().child("partidos");

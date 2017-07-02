@@ -7,14 +7,14 @@ package com.faltauno.faltauno;
 
 public class Partido {
     public String titulo;
-    public int jugadoresFaltantes;
+    public Long jugadoresFaltantes;
     public String cancha;
     public String host;
     public String fecha;
     public String hora;
     public int imagen;
 
-    public Partido(String nombrePartido, int jugadoresFaltantes, String cancha,
+    public Partido(String nombrePartido, Long jugadoresFaltantes, String cancha,
                    String creadoPor, String fechaPartido, int imagen, String horaPartido){
         this.titulo = nombrePartido;
         this.jugadoresFaltantes = jugadoresFaltantes;
@@ -24,12 +24,11 @@ public class Partido {
         hora = horaPartido;
         imagen= (int) (Math.random()*20)+18;
     }
-/*
 
     public String getNombrePartido() {
         return titulo;
     }
-    public int getJugadoresFaltantes() {
+    public Long getJugadoresFaltantes() {
         return jugadoresFaltantes;
     }
     public String getCancha() {
@@ -44,10 +43,11 @@ public class Partido {
     public String getHoraPartido() {
         return hora;
     }
-    public int getImagen() {
+/*    public int getImagen() {
         return mImagen;
     }
-
+*/
+/*
     public void setNombrePartido(String mnombrePartido) {
         this.titulo =mnombrePartido;
     }
@@ -68,7 +68,8 @@ public class Partido {
     public void setHoraPartido(String horaPartido) {
         this.fecha =horaPartido;
     }
-    public void setImagen(int imagen) {
+    */
+/*    public void setImagen(int imagen) {
         this.mImagen=imagen;
     }
 */
