@@ -69,14 +69,13 @@ public class ListaDePartidosAdapter extends RecyclerView.Adapter<ListaDePartidos
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         //holder.textView.setText(texto + " " + String.valueOf(position));
-        holder.imagen.setImageResource(items.get(position).getImagen());
-        holder.nombrePartido.setText(items.get(position).getnombrePartido());
-        holder.cancha.setText(items.get(position).getCancha());
+        holder.imagen.setImageResource(items.get(position).imagen);
+        holder.nombrePartido.setText(items.get(position).titulo);
+        holder.cancha.setText(items.get(position).cancha);
         //CAMBIO EL HOLDER DE FECHA HORA, CONCATENO PARA MANTENER CONSISTENCIA CON LOS GETTERS Y SETTERS DE CLASE PARTIDO
-        holder.fechaHora.setText(items.get(position).getFechaPartido()+", "+items.get(position).getHoraPartido());
-        holder.creadoPor.setText(items.get(position).getCreadoPor());
-        holder.jugadores.setText(items.get(position).getJugadoresFaltantes());
-        holder.nombrePartido.setText(items.get(position).getnombrePartido());
+        holder.fechaHora.setText(items.get(position).fecha+", "+items.get(position).hora);
+        holder.creadoPor.setText(items.get(position).host);
+        holder.jugadores.setText(items.get(position).jugadoresFaltantes);
 
     }
 
