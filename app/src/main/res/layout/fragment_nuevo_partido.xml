@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.faltauno.faltauno.NuevoPartido">
+    tools:context="com.faltauno.faltauno.NuevoPartido"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -125,14 +126,14 @@
 
         <Button
             android:id="@+id/botonCrear"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/hueso"
             android:layout_width="161dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp"
-            android:text="Crear Partido!" />
+            android:background="@color/colorPrimary"
+            android:text="Crear Partido!"
+            android:textColor="@color/hueso" />
     </LinearLayout>
 
 

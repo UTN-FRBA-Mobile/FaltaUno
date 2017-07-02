@@ -15,6 +15,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -32,6 +33,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import static android.R.attr.fragment;
 import static android.R.attr.tag;
 import static android.R.id.message;
 
@@ -132,5 +134,36 @@ public class MainActivity extends AppCompatActivity {
 //        LoginManager.getInstance().logOut();
 //        andaYLogueate();
 //    }
+
+    public void mostrarNuevoPartido() {
+        NuevoPartido fragment = new NuevoPartido();
+
+        FragmentManager m = getSupportFragmentManager();
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setVisibility(View.GONE);
+        m.beginTransaction()
+//                .show(fragment)
+                .add(R.id.activity_main, fragment)
+                .addToBackStack(null)
+                .commit();
+
+    }
+
+    public void cerrarNuevoPartido() {
+
+        FragmentManager m = getSupportFragmentManager();
+        // Saco el último fragment que cargué para volver al pager viewer
+        m.popBackStack();
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setVisibility(View.VISIBLE);
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+            tabLayout.setVisibility(View.VISIBLE);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
 

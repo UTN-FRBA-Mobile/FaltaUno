@@ -109,16 +109,6 @@ public class NuevoPartido extends Fragment {
         np.setMinValue(1);
         np.setMaxValue(20);
 
-
-
-
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(vista.getContext(),
-//                R.array.canchas_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        //spinner.setAdapter(adapter);
-
         // Para datePicker
         final LinearLayout ll = (LinearLayout) vista.findViewById(R.id.l1);
         EditText fechaPartido = (EditText) vista.findViewById(R.id.fechaPartido);
@@ -142,6 +132,17 @@ public class NuevoPartido extends Fragment {
 
         });
 
+        //Para Botón
+        Button botonCrea = (Button) vista.findViewById(R.id.botonCrear);
+        botonCrea.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                grabarPartido();
+                ((MainActivity)getContext()).cerrarNuevoPartido();
+            }
+
+        });
+
         //PRUEBA FIREBASE
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("canchas");
               //  .child("c1").child("nombre");
@@ -162,7 +163,7 @@ public class NuevoPartido extends Fragment {
                   //Toast.makeText(getActivity(), canchaSnapshot.child("nombre").getValue().toString(), Toast.LENGTH_SHORT).show();
                     spinnerList.add(canchaSnapshot.child("nombre").getValue().toString());
                 }
-
+                spinnerList.add("Agregar cancha +");
                 //Armo el Spinner de canchas
                 spinner = (Spinner) vista.findViewById(R.id.spinner);
                 ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(vista.getContext(),android.R.layout.simple_spinner_item, spinnerList);
@@ -179,6 +180,11 @@ public class NuevoPartido extends Fragment {
         return vista;
 
     }
+
+    private void grabarPartido() {
+
+    }
+
     public static Fragment newInstance(String texto) {
 
         NuevoPartido fragment = new NuevoPartido();
