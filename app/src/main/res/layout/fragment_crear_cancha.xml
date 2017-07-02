@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.faltauno.faltauno.NuevoPartido">
+    tools:context="com.faltauno.faltauno.NuevoPartidoFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             android:maxLines="1"
         />
 
-        <Switch
+      <!--  <Switch
             android:id="@+id/crearCanchaCesped"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,14 +52,14 @@
             android:textSize="@dimen/editText"
             android:layout_margin="@dimen/text_margin"
             android:checked="false"
-            />
+            />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/crear_cancha_cant_jugadores"
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin">
-            </Spinner>
+            </Spinner>-->
 
         </LinearLayout>
         <LinearLayout
@@ -127,6 +127,7 @@
             android:layout_margin="@dimen/editText"
             android:layout_gravity="center"/>
         <Button
+            android:id="@+id/botonCrearCancha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/editText"

@@ -1,7 +1,6 @@
 package com.faltauno.faltauno;
 
 import android.content.Context;
-import android.support.annotation.StringDef;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Exequiel on 07/05/2017.
  */
 
-public class OtroAdapter extends RecyclerView.Adapter<OtroAdapter.ViewHolder>{
+public class ListaDePartidosAdapter extends RecyclerView.Adapter<ListaDePartidosAdapter.ViewHolder>{
 
-    private List<Partidos> items;
+    private List<Partido> items;
     private LayoutInflater layoutInflater;
     private String texto;
 
@@ -44,9 +44,10 @@ public class OtroAdapter extends RecyclerView.Adapter<OtroAdapter.ViewHolder>{
     }
 
 
-    public OtroAdapter(Context context, String texto) {
+    public ListaDePartidosAdapter(Context context, String texto) {
         //layoutInflater = LayoutInflater.from(context);
-        this.items=items;
+//        this.items=items;
+        this.items = new ArrayList<Partido>();
     }
 
     @Override
@@ -68,13 +69,13 @@ public class OtroAdapter extends RecyclerView.Adapter<OtroAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         //holder.textView.setText(texto + " " + String.valueOf(position));
-        holder.imagen.setImageResource(items.get(position).getImagen());
-        holder.nombrePartido.setText(items.get(position).getnombrePartido());
-        holder.cancha.setText(items.get(position).getCancha());
-        holder.fechaHora.setText(items.get(position).getFechaHoraPartido());
-        holder.creadoPor.setText(items.get(position).getCreadoPor());
-        holder.jugadores.setText(items.get(position).getJugadoresFaltantes());
-        holder.nombrePartido.setText(items.get(position).getnombrePartido());
+        holder.imagen.setImageResource(items.get(position).imagen);
+        holder.nombrePartido.setText(items.get(position).titulo);
+        holder.cancha.setText(items.get(position).cancha);
+        //CAMBIO EL HOLDER DE FECHA HORA, CONCATENO PARA MANTENER CONSISTENCIA CON LOS GETTERS Y SETTERS DE CLASE PARTIDO
+        holder.fechaHora.setText(items.get(position).fecha+", "+items.get(position).hora);
+        holder.creadoPor.setText(items.get(position).host);
+        holder.jugadores.setText(items.get(position).jugadoresFaltantes);
 
     }
 

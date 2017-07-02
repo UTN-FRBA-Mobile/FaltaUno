@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.faltauno.faltauno.NuevoPartido">
+    tools:context="com.faltauno.faltauno.NuevoPartidoFragment"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,11 +21,11 @@
             android:text="@string/nuevo_partido_titulo"
             android:textSize="28dp" />
 
-
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="45dp"
+
             android:ems="10"
             android:textSize="30dp"
             android:overlapAnchor="false" />
@@ -35,6 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
             android:layout_weight="0.59">
 
             <EditText
@@ -70,23 +73,23 @@
 
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/nombrePartido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Ponele nombre al partido..."
-             />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.11" />
+            android:layout_weight="0.07" />
 
         <Switch
             android:id="@+id/switch1"
             android:layout_width="match_parent"
             android:layout_height="51dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:text="Los jugadores requieren aprobación"
             android:textSize="20dp" />
 
@@ -121,7 +124,16 @@
 
         </LinearLayout>
 
-
+        <Button
+            android:id="@+id/botonCrear"
+            android:layout_width="161dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:text="Crear Partido!"
+            android:textColor="@color/hueso" />
     </LinearLayout>
 
 
