@@ -42,8 +42,8 @@ public class CanchasFragmentAdapter extends RecyclerView.Adapter<CanchasFragment
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Cancha cancha = canchasList.get(position);
-        holder.titulo.setText(cancha.getName());
-        holder.ubicacion.setText(cancha.getDire());
+        holder.titulo.setText(cancha.getNombre());
+        holder.ubicacion.setText(cancha.getDireccion());
         //holder.barrio.setText(cancha.getBarrio());
     }
 

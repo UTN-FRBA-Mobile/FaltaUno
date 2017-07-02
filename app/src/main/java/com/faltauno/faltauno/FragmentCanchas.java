@@ -79,7 +79,7 @@ public class FragmentCanchas extends Fragment {
                     //dbList.add(canchaSnapshot);
                     nombre = canchaSnapshot.child("nombre").getValue().toString();
                     direccion = canchaSnapshot.child("direccion").getValue().toString();
-                    cancha = new Cancha(nombre, direccion);
+                    cancha = new Cancha(nombre, direccion, R.drawable.googleg_standard_color_18);
                     canchasList.add(cancha);
                 }
             }

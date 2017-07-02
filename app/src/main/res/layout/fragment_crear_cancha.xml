@@ -36,9 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="Nombre de la Cancha"
+            android:hint="Nombre de la Cancha"
             android:textSize="@dimen/editText"
-            android:focusable="false"
             android:clickable="true"
             android:layout_margin="@dimen/text_margin"
             android:maxLines="1"
@@ -81,9 +80,10 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/crearCanchaDire"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/crear_cancha_ubicacion"
+                android:hint="@string/crear_cancha_ubicacion"
                 android:layout_margin="@dimen/text_margin"
                 android:textSize="@dimen/editText"
                 android:textColor="@color/black"

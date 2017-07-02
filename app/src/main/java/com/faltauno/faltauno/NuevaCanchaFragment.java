@@ -7,6 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class NuevaCanchaFragment extends Fragment {
@@ -18,7 +24,10 @@ public class NuevaCanchaFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    public EditText direCancha;
+    public EditText nombreCancha;
+
+   // private OnFragmentInteractionListener mListener;
 
     public NuevaCanchaFragment() {
         // Required empty public constructor
@@ -48,6 +57,9 @@ public class NuevaCanchaFragment extends Fragment {
 
         final View vista = inflater.inflate(R.layout.fragment_crear_cancha, container, false);
 
+        direCancha = (EditText) vista.findViewById(R.id.crearCanchaDire);
+        nombreCancha = (EditText) vista.findViewById(R.id.crearCanchaNombre);
+
         //Para Botón
         Button botonCrea = (Button) vista.findViewById(R.id.botonCrearCancha);
         botonCrea.setOnClickListener(new View.OnClickListener(){
@@ -61,10 +73,32 @@ public class NuevaCanchaFragment extends Fragment {
         return vista;
     }
 
-    public void grabarCancha(){}
+    public void grabarCancha(){
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+            //Grabar Campos
+            String nombre ="";
+            String direccion="";
+            int img = 0;
+
+            nombre = nombreCancha.getText().toString();
+            direccion = direCancha.getText().toString();
+
+            //Levanto el id de la cancha
+//            DataSnapshot snapshot = canchasList.get(spinner.getSelectedItemPosition());
+//            cancha = snapshot.getKey();
+
+            Cancha nuevaCancha = new Cancha(nombre,direccion,img);
+
+            DatabaseReference canchas = FirebaseDatabase.getInstance().getReference().child("canchas");
+            String clave = canchas.push().getKey();  //setValue(nuevoPartido);
+            canchas.child(clave).setValue(nuevaCancha);
+
+        }
+
     }
-}
+
+//    public interface OnFragmentInteractionListener {
+//        // TODO: Update argument type and name
+//        void onFragmentInteraction(Uri uri);
+//    }
+
