@@ -2,6 +2,7 @@ package com.faltauno.faltauno;
 
 import android.app.Application;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.BundleCompat;
@@ -30,6 +31,11 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by jonathan on 13/05/17.
@@ -61,22 +67,46 @@ public class Login_App extends AppCompatActivity implements View.OnClickListener
         etEmail = (EditText)findViewById(R.id.etEmailAddr);
         etPass = (EditText)findViewById(R.id.etPassword);
 
+
+
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
                     if (user != null) {
-//                        Log.d(TAG, "Logueado con id: " + user.getUid());
+                        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("usuarios/"+user.getUid());
+                        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                // cuando se loguea obtengo los datos del usuario
+
+                                Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                                if (usuario == null) {
+                                    usuario = new Usuario("","");
+                                    ref.setValue(usuario);
+                                }
+                                SharedPreferences pref = getApplicationContext().getSharedPreferences("USUARIO_DATOS", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("nombre",usuario.getNombre());
+                                editor.putString("usuario",usuario.getUsuario());
+                                editor.commit();
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                System.out.println("The read failed: " + databaseError.getCode());
+                            }
+                        });
+
                         irAlMain();
+
                     } else {
                         Log.d(TAG, "Currently Signed Out");
                     }
 
             }
         };
-
-//        updateStatus();
 
         callbackManager = CallbackManager.Factory.create();
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
