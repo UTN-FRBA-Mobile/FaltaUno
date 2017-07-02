@@ -191,10 +191,15 @@ public class NuevoPartidoFragment extends Fragment {
         Partido nuevoPartido = new Partido(nombre,faltantes,cancha,
                 host,fecha,img,hora);
 
+        //GRABO PARTIDO NUEVO
         DatabaseReference partidos = FirebaseDatabase.getInstance().getReference().child("partidos");
-        String clave = partidos.push().getKey();  //setValue(nuevoPartido);
+        String clave = partidos.push().getKey();
         partidos.child(clave).setValue(nuevoPartido);
 
+        //GRABO PARTIDOS DEL USUARIO
+        DatabaseReference partidosDelUsuario = FirebaseDatabase.getInstance().getReference().child("partidosDelUsuario");
+        partidosDelUsuario.child(host).child(clave).setValue("host");
+        
     }
 
     public static Fragment newInstance(String texto) {
