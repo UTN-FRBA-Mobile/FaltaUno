@@ -27,8 +27,6 @@ public class NuevaCanchaFragment extends Fragment {
     public EditText direCancha;
     public EditText nombreCancha;
 
-   // private OnFragmentInteractionListener mListener;
-
     public NuevaCanchaFragment() {
         // Required empty public constructor
     }
@@ -83,22 +81,14 @@ public class NuevaCanchaFragment extends Fragment {
             nombre = nombreCancha.getText().toString();
             direccion = direCancha.getText().toString();
 
-            //Levanto el id de la cancha
-//            DataSnapshot snapshot = canchasList.get(spinner.getSelectedItemPosition());
-//            cancha = snapshot.getKey();
-
             Cancha nuevaCancha = new Cancha(nombre,direccion,img);
 
             DatabaseReference canchas = FirebaseDatabase.getInstance().getReference().child("canchas");
-            String clave = canchas.push().getKey();  //setValue(nuevoPartido);
+            String clave = canchas.push().getKey();
             canchas.child(clave).setValue(nuevaCancha);
 
         }
 
     }
 
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        void onFragmentInteraction(Uri uri);
-//    }
 
