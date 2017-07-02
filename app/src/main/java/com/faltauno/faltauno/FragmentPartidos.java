@@ -2,6 +2,7 @@ package com.faltauno.faltauno;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -65,6 +66,18 @@ public class FragmentPartidos extends Fragment {
         recyclerView.setAdapter(partidosAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         preparePartidosData();
+        FloatingActionButton fab1 = (FloatingActionButton) view.findViewById(R.id.nuevoPartido);
+        //Agrego código para abrir fragment NuevoPartidoFragment
+        fab1.setOnClickListener(new View.OnClickListener(){
+            public void onClick (View v){
+                mostrarNuevoPartido();
+            }
+        });
+
+    }
+
+    private void mostrarNuevoPartido() {
+        ((MainActivity)getContext()).mostrarNuevoPartido();
     }
 
     private void preparePartidosData() {
