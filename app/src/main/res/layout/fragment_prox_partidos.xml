@@ -4,12 +4,13 @@
     android:id="@+id/proximos_partidos"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.faltauno.faltauno.FragmentProxPartidos">
+    tools:context="com.faltauno.faltauno.FragmentPartidos">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/recyclerViewPartidos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="vertical"
     />
 
     <android.support.design.widget.FloatingActionButton
@@ -20,13 +21,5 @@
         android:layout_margin="10dp"
         android:src="@drawable/pluswhite"
         />
-
-    <ListView
-        android:id="@+id/listapartidos"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null">
-
-    </ListView>
 
 </FrameLayout>

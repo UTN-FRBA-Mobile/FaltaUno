@@ -18,25 +18,25 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.faltauno.faltauno.R.id.recyclerViewCanchas;
+import static com.faltauno.faltauno.R.id.recyclerViewPartidos;
 
 /**
- * Created by Chechu on 25/5/2017.
+ * Created by Exequiel on 25/5/2017.
  */
 
-public class FragmentCanchas extends Fragment {
+public class FragmentPartidos extends Fragment {
     private static final String ARG_PARAM1 = "param1";
-    private List<Cancha> canchasList = new ArrayList<>();
-    private CanchasFragmentAdapter canchasAdapter;
+    private List<Partido> partidosList = new ArrayList<>();
+    private PartidosFragmentAdapter partidosAdapter;
 
     private RecyclerView recyclerView;
 
-    public FragmentCanchas() {
+    public FragmentPartidos() {
         // Required empty public constructor
     }
 
-    public static FragmentCanchas newInstance(String texto) {
-        FragmentCanchas fragment = new FragmentCanchas();
+    public static FragmentPartidos newInstance(String texto) {
+        FragmentPartidos fragment = new FragmentPartidos();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, texto);
         fragment.setArguments(args);
@@ -54,34 +54,42 @@ public class FragmentCanchas extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 //        prepareCanchasData();
-        return inflater.inflate(R.layout.recycler_view_canchas, container, false);
+        return inflater.inflate(R.layout.fragment_prox_partidos, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        canchasAdapter = new CanchasFragmentAdapter(getContext(), canchasList);
-        recyclerView = (RecyclerView) view.findViewById(recyclerViewCanchas);
-        recyclerView.setAdapter(canchasAdapter);
+        partidosAdapter = new PartidosFragmentAdapter(getContext(), partidosList);
+        recyclerView = (RecyclerView) view.findViewById(recyclerViewPartidos);
+        recyclerView.setAdapter(partidosAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        prepareCanchasData();
+        preparePartidosData();
     }
 
-    private void prepareCanchasData() {
+    private void preparePartidosData() {
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("canchas");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("partidos");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String nombre;
-                String direccion;
-                Cancha cancha;
-                for (DataSnapshot canchaSnapshot: dataSnapshot.getChildren()) {
+                String titulo;
+                String cancha;
+                String fecha;
+                String hora;
+                String host;
+                Long jfaltantes;
+                Partido partido;
+                for (DataSnapshot partidoSnapshot: dataSnapshot.getChildren()) {
                     //dbList.add(canchaSnapshot);
-                    nombre = canchaSnapshot.child("nombre").getValue().toString();
-                    direccion = canchaSnapshot.child("direccion").getValue().toString();
-                    cancha = new Cancha(nombre, direccion, R.drawable.googleg_standard_color_18);
-                    canchasList.add(cancha);
+                    titulo = partidoSnapshot.child("titulo").getValue().toString();
+                    cancha = partidoSnapshot.child("cancha").getValue().toString();
+                    fecha = partidoSnapshot.child("fecha").getValue().toString();
+                    hora = partidoSnapshot.child("hora").getValue().toString();
+                    host = partidoSnapshot.child("host").getValue().toString();
+                    jfaltantes = partidoSnapshot.child("jugadoresFaltantes").getValue(Long.class);
+                    partido = new Partido(titulo, jfaltantes, cancha, host, fecha, 0, hora);
+                    partidosList.add(partido);
                 }
             }
 
