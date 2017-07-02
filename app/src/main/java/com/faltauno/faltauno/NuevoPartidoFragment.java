@@ -1,16 +1,14 @@
 package com.faltauno.faltauno;
 
 
-import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 //import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
@@ -19,54 +17,26 @@ import android.widget.ArrayAdapter;
 
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.RelativeLayout;
-import android.app.DialogFragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import android.widget.DatePicker;
-import android.app.DatePickerDialog;
 import android.widget.EditText;
-import android.app.Activity;
-import android.view.View;
-import android.app.DialogFragment;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 
-import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
-import android.os.Bundle;
-import android.text.InputType;
-import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 //IMPORTS PARA FIREBASE
-import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
 
-
-public class NuevoPartido extends Fragment {
+public class NuevoPartidoFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -75,12 +45,12 @@ public class NuevoPartido extends Fragment {
     public Spinner spinner;
     public ArrayList spinnerList;
     
-    public NuevoPartido() {
+    public NuevoPartidoFragment() {
         // Required empty public constructor
     }
 
-    public static NuevoPartido newInstance(String param1, String param2) {
-        NuevoPartido fragment = new NuevoPartido();
+    public static NuevoPartidoFragment newInstance(String param1, String param2) {
+        NuevoPartidoFragment fragment = new NuevoPartidoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -170,6 +140,23 @@ public class NuevoPartido extends Fragment {
                 spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(spinnerArrayAdapter);
 
+                //Controlo si eligió nueva cancha
+
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                        if (spinner.getSelectedItem().toString()=="Agregar cancha +"){
+                            mostrarNuevaCancha();
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parentView) {
+                        // Por ahora nadaa
+                    }
+
+                });
+
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -187,7 +174,7 @@ public class NuevoPartido extends Fragment {
 
     public static Fragment newInstance(String texto) {
 
-        NuevoPartido fragment = new NuevoPartido();
+        NuevoPartidoFragment fragment = new NuevoPartidoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, texto);
         fragment.setArguments(args);
@@ -229,6 +216,10 @@ public class NuevoPartido extends Fragment {
         },hora,minutos,false);
         timePicker.setTitle("Ingrese Horario");
         timePicker.show();
+    }
+
+    public void mostrarNuevaCancha(){
+        ((MainActivity)getContext()).mostrarNuevaCancha();
     }
 }
 

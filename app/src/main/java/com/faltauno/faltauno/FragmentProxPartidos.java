@@ -65,7 +65,7 @@ public void onViewCreated (View view, @Nullable Bundle savedInstanceState){
     super.onViewCreated(view, savedInstanceState);
 
     FloatingActionButton fab1 = (FloatingActionButton) view.findViewById(R.id.nuevoPartido);
-    //Agrego código para abrir fragment NuevoPartido
+    //Agrego código para abrir fragment NuevoPartidoFragment
     fab1.setOnClickListener(new View.OnClickListener(){
         public void onClick (View v){
             mostrarNuevoPartido();
