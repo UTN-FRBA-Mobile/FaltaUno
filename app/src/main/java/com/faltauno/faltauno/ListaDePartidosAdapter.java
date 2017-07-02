@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Exequiel on 07/05/2017.
  */
 
-public class OtroAdapter extends RecyclerView.Adapter<OtroAdapter.ViewHolder>{
+public class ListaDePartidosAdapter extends RecyclerView.Adapter<ListaDePartidosAdapter.ViewHolder>{
 
     private List<Partido> items;
     private LayoutInflater layoutInflater;
@@ -44,7 +44,7 @@ public class OtroAdapter extends RecyclerView.Adapter<OtroAdapter.ViewHolder>{
     }
 
 
-    public OtroAdapter(Context context, String texto) {
+    public ListaDePartidosAdapter(Context context, String texto) {
         //layoutInflater = LayoutInflater.from(context);
 //        this.items=items;
         this.items = new ArrayList<Partido>();
