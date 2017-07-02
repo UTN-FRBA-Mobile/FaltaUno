@@ -8,12 +8,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.faltauno.faltauno.R.id.recyclerView;
 import static com.faltauno.faltauno.R.id.recyclerViewCanchas;
 
 /**
@@ -22,10 +26,8 @@ import static com.faltauno.faltauno.R.id.recyclerViewCanchas;
 
 public class FragmentCanchas extends Fragment {
     private static final String ARG_PARAM1 = "param1";
-    private List<Canchas> canchasList = new ArrayList<>();
+    private List<Cancha> canchasList = new ArrayList<>();
     private CanchasFragmentAdapter canchasAdapter;
-
-    private String mParam1;
 
     private RecyclerView recyclerView;
 
@@ -51,6 +53,7 @@ public class FragmentCanchas extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+//        prepareCanchasData();
         return inflater.inflate(R.layout.recycler_view_canchas, container, false);
     }
 
@@ -58,40 +61,34 @@ public class FragmentCanchas extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         canchasAdapter = new CanchasFragmentAdapter(getContext(), canchasList);
-
         recyclerView = (RecyclerView) view.findViewById(recyclerViewCanchas);
         recyclerView.setAdapter(canchasAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         prepareCanchasData();
     }
 
     private void prepareCanchasData() {
-        Canchas cancha = new Canchas("Futbol Caballito", "Rivadavia 2000", "Caballito", R.drawable.messenger_bubble_large_blue);
-        canchasList.add(cancha);
 
-        cancha = new Canchas("Futbol Almagro", "Rivadavia 3000", "Almagro", R.drawable.messenger_bubble_large_blue);
-        canchasList.add(cancha);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("canchas");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String nombre;
+                String direccion;
+                Cancha cancha;
+                for (DataSnapshot canchaSnapshot: dataSnapshot.getChildren()) {
+                    //dbList.add(canchaSnapshot);
+                    nombre = canchaSnapshot.child("nombre").getValue().toString();
+                    direccion = canchaSnapshot.child("direccion").getValue().toString();
+                    cancha = new Cancha(nombre, direccion, R.drawable.googleg_standard_color_18);
+                    canchasList.add(cancha);
+                }
+            }
 
-        cancha = new Canchas("Futbol Caballito 2", "Riglos 950", "Caballito", R.drawable.messenger_bubble_large_blue);
-        canchasList.add(cancha);
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-        cancha = new Canchas("Futbol Lugano I", "Escalada y Autopista", "Lugano" , R.drawable.messenger_bubble_large_blue);
-        canchasList.add(cancha);
-
-        cancha = new Canchas("Futbol Lugano II", "Mozart 2300", "Lugano", R.drawable.messenger_bubble_large_blue);
-        canchasList.add(cancha);
-
-        cancha = new Canchas("Futbol Caballito 3", "Riglos 950", "Caballito", R.drawable.messenger_bubble_large_blue);
-        canchasList.add(cancha);
-
-        cancha = new Canchas("Futbol Lugano III", "Escalada y Autopista", "Lugano" , R.drawable.messenger_bubble_large_blue);
-        canchasList.add(cancha);
-
-        cancha = new Canchas("Futbol Lugano IV", "Mozart 2300", "Lugano", R.drawable.messenger_bubble_large_blue);
-        canchasList.add(cancha);
-
-        canchasAdapter.notifyDataSetChanged();
+            }
+        });
     }
 }
-

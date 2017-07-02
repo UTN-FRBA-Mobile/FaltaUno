@@ -1,39 +1,23 @@
 package com.faltauno.faltauno;
 
-import android.app.Dialog;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.TabLayout;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 
-import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.Toast;
-
-import static android.R.attr.tag;
-import static android.R.id.message;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -132,5 +116,59 @@ public class MainActivity extends AppCompatActivity {
 //        LoginManager.getInstance().logOut();
 //        andaYLogueate();
 //    }
+
+    public void mostrarNuevoPartido() {
+        NuevoPartidoFragment fragment = new NuevoPartidoFragment();
+
+        FragmentManager m = getSupportFragmentManager();
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setVisibility(View.GONE);
+        m.beginTransaction()
+//                .show(fragment)
+                .add(R.id.activity_main, fragment)
+                .addToBackStack(null)
+                .commit();
+
+    }
+
+    public void cerrarNuevoPartido() {
+
+        FragmentManager m = getSupportFragmentManager();
+        // Saco el último fragment que cargué para volver al pager viewer
+        m.popBackStack();
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setVisibility(View.VISIBLE);
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        FragmentManager m = getSupportFragmentManager();
+        //Antes de habilitar la barra chequeo estar en el fragment posterior al view pager
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 && m.getBackStackEntryCount()==1) {
+
+            final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+            tabLayout.setVisibility(View.VISIBLE);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public void mostrarNuevaCancha() {
+        NuevaCanchaFragment fragment = new NuevaCanchaFragment();
+
+        FragmentManager m = getSupportFragmentManager();
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setVisibility(View.GONE);
+        m.beginTransaction()
+                .replace(R.id.activity_main, fragment)
+                .addToBackStack(null)
+                .commit();
+
+    }
+
+    public void cerrarNuevaCancha() {
+
+        FragmentManager m = getSupportFragmentManager();
+        // Saco el último fragment que cargué para volver al pager viewer
+        m.popBackStack();
+    }
 }
 

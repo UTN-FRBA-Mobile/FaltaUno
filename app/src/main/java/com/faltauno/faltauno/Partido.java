@@ -7,14 +7,14 @@ package com.faltauno.faltauno;
 
 public class Partido {
     public String titulo;
-    public int jugadoresFaltantes;
+    public Long jugadoresFaltantes;
     public String cancha;
     public String host;
     public String fecha;
     public String hora;
-    public int mImagen;
+    public int imagen;
 
-    public Partido(String nombrePartido, int jugadoresFaltantes, String cancha,
+    public Partido(String nombrePartido, Long jugadoresFaltantes, String cancha,
                    String creadoPor, String fechaPartido, int imagen, String horaPartido){
         this.titulo = nombrePartido;
         this.jugadoresFaltantes = jugadoresFaltantes;
@@ -22,15 +22,13 @@ public class Partido {
         host = creadoPor;
         fecha = fechaPartido;
         hora = horaPartido;
-        mImagen= (int) (Math.random()*20)+18;
+        imagen= (int) (Math.random()*20)+18;
     }
 
-
-
-    public String getnombrePartido() {
+    public String getNombrePartido() {
         return titulo;
     }
-    public int getJugadoresFaltantes() {
+    public Long getJugadoresFaltantes() {
         return jugadoresFaltantes;
     }
     public String getCancha() {
@@ -45,28 +43,36 @@ public class Partido {
     public String getHoraPartido() {
         return hora;
     }
-    public int getImagen() {
+/*    public int getImagen() {
         return mImagen;
     }
-
-    public void setidPartido(String mnombrePartido) {
+*/
+/*
+    public void setNombrePartido(String mnombrePartido) {
         this.titulo =mnombrePartido;
     }
-    public void getJugadoresFaltantes(int jugadoresFaltantes) {
+
+    public void setJugadoresFaltantes(int jugadoresFaltantes) {
         this.jugadoresFaltantes = jugadoresFaltantes;
     }
-    public void getCancha(String cancha) {
+    public void setCancha(String cancha) {
         this.cancha =cancha;
     }
-    public void getCreadoPor(String creadoPor) {
+
+    public void setCreadoPor(String creadoPor) {
         this.host =creadoPor;
     }
-    public void getFechaHoraPartido(String fechaHoraPartido) {
+    public void setFechaPartido(String fechaHoraPartido) {
         this.fecha =fechaHoraPartido;
     }
-    public void getImagen(int imagen) {
+    public void setHoraPartido(String horaPartido) {
+        this.fecha =horaPartido;
+    }
+    */
+/*    public void setImagen(int imagen) {
         this.mImagen=imagen;
     }
+*/
 
     public String toString() {
         return"Partido{"+

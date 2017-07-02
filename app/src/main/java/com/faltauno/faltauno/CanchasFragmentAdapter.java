@@ -21,9 +21,9 @@ import java.util.List;
 public class CanchasFragmentAdapter extends RecyclerView.Adapter<CanchasFragmentAdapter.ViewHolder> {
     private LayoutInflater layoutInflater;
 
-    private List<Canchas> canchasList;
+    private List<Cancha> canchasList;
 
-    public CanchasFragmentAdapter(Context context, List<Canchas> canchasList) {
+    public CanchasFragmentAdapter(Context context, List<Cancha> canchasList) {
         layoutInflater = LayoutInflater.from(context);
         this.canchasList = canchasList;
     }
@@ -41,10 +41,10 @@ public class CanchasFragmentAdapter extends RecyclerView.Adapter<CanchasFragment
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Canchas cancha = canchasList.get(position);
+        Cancha cancha = canchasList.get(position);
         holder.titulo.setText(cancha.getNombre());
-        holder.ubicacion.setText(cancha.getUbicacion());
-        holder.barrio.setText(cancha.getBarrio());
+        holder.ubicacion.setText(cancha.getDireccion());
+        //holder.barrio.setText(cancha.getBarrio());
     }
 
     @Override
@@ -53,13 +53,14 @@ public class CanchasFragmentAdapter extends RecyclerView.Adapter<CanchasFragment
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView titulo, ubicacion, barrio;
+        TextView titulo, ubicacion;
+        //TextView titulo, ubicacion, barrio;
 
         public ViewHolder(View itemView) {
             super(itemView);
             titulo = (TextView) itemView.findViewById(R.id.canchaRowNombre);
             ubicacion = (TextView) itemView.findViewById(R.id.canchaRowUbicacion);
-            barrio = (TextView) itemView.findViewById(R.id.canchaRowBarrio);
+            //barrio = (TextView) itemView.findViewById(R.id.canchaRowBarrio);
         }
     }
 }
