@@ -12,8 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by Chechu on 21/5/2017.
@@ -89,16 +92,11 @@ public class DetallePartidoDialogFragment extends DialogFragment {
         Button botonUnirse = (Button) view.findViewById(R.id.botonUnirse);
 
         if (estado.equals("host")){
-            //// TODO:
-            //Poner el boton "unirse" en "eliminar partido"
+
             botonUnirse.setText("Eliminar Partido");
-            //Borrar a los users q esten en el partido y borrar el partido
 
         } else if (estado.equals("guest")) {
-            //todo:
-            //Poner boton "unirse"en "bajarse"
             botonUnirse.setText("Bajarse del Partido");
-            //borrar mi referencia a ese partido
         }
 
         builder.setView(view);
@@ -117,7 +115,7 @@ public class DetallePartidoDialogFragment extends DialogFragment {
                 if (estado.equals("host")) {
                     borrar(id, host);
                 } else if (estado.equals("guest")) {
-                    unirse(id, host, jFalta);
+                    salirse(id, host, jFalta);
                 } else {
                     unirse(id, host, jFalta);
                 }
@@ -147,10 +145,21 @@ public class DetallePartidoDialogFragment extends DialogFragment {
         partidos.child(idPartido).child("jugadoresFaltantes").setValue(jugadoresFaltantes + 1);
     }
 
-    private void borrar(String idPartido, String idUser) {
+    private void borrar(final String idPartido, String idUser) {
         DatabaseReference partidosDelUsuario = FirebaseDatabase.getInstance().getReference().child("partidosDelUsuario");
-        //todo: recorrer partidos y borrar
+        partidosDelUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+             public void onDataChange(DataSnapshot usuariosSnapshot) {
+                      for (DataSnapshot usuarioSnapshot : usuariosSnapshot.getChildren()) {
+                                usuarioSnapshot.child(idPartido).getRef().removeValue();
+                      }
+                  }
 
+                  @Override
+                  public void onCancelled(DatabaseError databaseError) {
+
+                  }
+              });
         //BORRAR PARTIDO
         DatabaseReference partidos = FirebaseDatabase.getInstance().getReference().child("partidos");
         partidos.child(idPartido).removeValue();
