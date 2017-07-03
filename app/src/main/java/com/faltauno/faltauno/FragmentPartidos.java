@@ -194,7 +194,7 @@ public class FragmentPartidos extends Fragment {
         Collections.sort(list, new Comparator<Partido>() {
 
             public int compare(Partido p1, Partido p2) {
-                if (p1.distancia < p2.distancia)
+                if (p1.distancia > p2.distancia)
                     return  1;
                 else if (p1.distancia == p2.distancia)
                     return 0;
