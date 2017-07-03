@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.database.DatabaseUtilsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +39,7 @@ public class FragmentPartidos extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private List<Partido> partidosList = new ArrayList<>();
     private PartidosFragmentAdapter partidosAdapter;
+    private DataSnapshot misPartidos;
     private Geocoder geocoder;
 
 
@@ -58,8 +61,8 @@ public class FragmentPartidos extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         geocoder = new Geocoder(this.getContext());
+
     }
 
     @Override
@@ -79,42 +82,46 @@ public class FragmentPartidos extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         preparePartidosData();
 
-
         //
         partidosAdapter.setOnClickListener(new PartidosFragmentAdapter.OnClickListener() {
             @Override
             public void onClick(Partido partido) {
+                // OBTENGO SI ES HOST O GUEST
+                Object estado = misPartidos.child(partido.id).getValue();
+
                 //ARMO DETALLE PARTIDO
                 FragmentManager fm = getFragmentManager();
                 DetallePartidoDialogFragment detalleDialogFragment = new DetallePartidoDialogFragment();
-                Bundle b = new Bundle();
-                b.putString("idPartido", partido.id);
-                b.putString("titulo", partido.titulo);
-                b.putString("fecha", partido.fecha);
-                b.putString("hora", partido.hora);
-                b.putString("cancha", partido.cancha);
-                b.putLong("jugadoresFaltantes", partido.jugadoresFaltantes);
-                b.putString("cancha.nombre", partido.canchaRef.getNombre());
-
-                detalleDialogFragment.setArguments(b);
+                detalleDialogFragment.setArguments(partido, estado);
                 detalleDialogFragment.show(fm, "detalle");
             }
         });
 
         //Agrego código para abrir fragment NuevoPartidoFragment
         FloatingActionButton fab1 = (FloatingActionButton) view.findViewById(R.id.nuevoPartido);
-        fab1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        fab1.setOnClickListener(new View.OnClickListener(){
+            public void onClick (View v){
                 mostrarNuevoPartido();
             }
         });
     }
 
     private void mostrarNuevoPartido() {
-        ((MainActivity) getContext()).mostrarNuevoPartido();
+        ((MainActivity)getContext()).mostrarNuevoPartido();
     }
 
     private void preparePartidosData() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+        DatabaseReference partidosDelUsuario = FirebaseDatabase.getInstance().getReference().child("partidosDelUsuario");
+        partidosDelUsuario.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                misPartidos = dataSnapshot;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
 
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("partidos");
         ref.addValueEventListener(new ValueEventListener() {
@@ -153,17 +160,12 @@ public class FragmentPartidos extends Fragment {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
                     }
                 });
-
-
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
         });
     }
 
@@ -183,7 +185,7 @@ public class FragmentPartidos extends Fragment {
         Float dist = canchaLocation.distanceTo(userLocation);
 
         System.out.println("la distancia entre la cancha " + dir + " y el usuario que esta en " + userLocation.toString()
-            + " es " + dist.toString());
+                + " es " + dist.toString());
 
         return canchaLocation.distanceTo(userLocation);
     }
