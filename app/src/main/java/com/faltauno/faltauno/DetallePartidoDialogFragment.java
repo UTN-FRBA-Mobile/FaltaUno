@@ -115,7 +115,7 @@ public class DetallePartidoDialogFragment extends DialogFragment {
                 if (estado.equals("host")) {
                     borrar(id, host);
                 } else if (estado.equals("guest")) {
-                    unirse(id, host, jFalta);
+                    salirse(id, host, jFalta);
                 } else {
                     unirse(id, host, jFalta);
                 }
@@ -147,8 +147,6 @@ public class DetallePartidoDialogFragment extends DialogFragment {
 
     private void borrar(final String idPartido, String idUser) {
         DatabaseReference partidosDelUsuario = FirebaseDatabase.getInstance().getReference().child("partidosDelUsuario");
-        //todo: recorrer partidos y borrar
-
         partidosDelUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
              public void onDataChange(DataSnapshot usuariosSnapshot) {
