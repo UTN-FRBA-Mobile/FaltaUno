@@ -27,9 +27,9 @@ import static com.faltauno.faltauno.R.id.recyclerViewPartidos;
 
 public class FragmentMisPartidos extends Fragment {
     private static final String ARG_PARAM1 = "param1";
-    private List<Partido> partidosList = new ArrayList<>();
+    private List<MiPartido> partidosList = new ArrayList<>();
 //    private List<PartidoXUsuario> partidosXUsuarioList = new ArrayList<>();
-    private PartidosFragmentAdapter partidosAdapter;
+    private MisPartidosFragmentAdapter partidosAdapter;
 
     private RecyclerView recyclerView;
 
@@ -62,7 +62,7 @@ public class FragmentMisPartidos extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        partidosAdapter = new PartidosFragmentAdapter(getContext(), partidosList);
+        partidosAdapter = new MisPartidosFragmentAdapter(getContext(), partidosList);
         recyclerView = (RecyclerView) view.findViewById(recyclerViewPartidos);
         recyclerView.setAdapter(partidosAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -78,12 +78,14 @@ public class FragmentMisPartidos extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String nombrePartido;
-                String tipo;
+                String rol;
                 for (DataSnapshot partidoUsuarioSnapshot: dataSnapshot.getChildren()) {
                     nombrePartido = partidoUsuarioSnapshot.getKey().toString();
-                    tipo = partidoUsuarioSnapshot.getValue().toString();
+                    rol = partidoUsuarioSnapshot.getValue().toString();
                     DatabaseReference refPartido = FirebaseDatabase.getInstance().getReference().child("partidos");
+                    final String finalRol = rol;
                     refPartido.orderByKey().equalTo(nombrePartido).addValueEventListener(new ValueEventListener() {
+
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             String titulo;
@@ -92,16 +94,29 @@ public class FragmentMisPartidos extends Fragment {
                             String hora;
                             String host;
                             Long jfaltantes;
-                            Partido partido;
-                            for (DataSnapshot partidoSnapshot: dataSnapshot.getChildren()) {
-                                titulo = dataSnapshot.child("titulo").getValue().toString();
-                                cancha = dataSnapshot.child("cancha").getValue().toString();
-                                fecha = dataSnapshot.child("fecha").getValue().toString();
-                                hora = dataSnapshot.child("hora").getValue().toString();
-                                jfaltantes = dataSnapshot.child("jugadoresFaltantes").getValue(Long.class);
-                                partido = new Partido(titulo, jfaltantes, cancha, "No Jos", fecha, 0, hora);
-                                partidosList.add(partido);
-                            }
+                            MiPartido partido;
+                            DataSnapshot partidoSnapshot = dataSnapshot.getChildren().iterator().next();
+                            titulo = partidoSnapshot.child("titulo").getValue().toString();
+                            cancha = partidoSnapshot.child("cancha").getValue().toString();
+                            fecha = partidoSnapshot.child("fecha").getValue().toString();
+                            hora = partidoSnapshot.child("hora").getValue().toString();
+/*                            DatabaseReference refCancha = FirebaseDatabase.getInstance().getReference().child("canchas");
+                            final String[] nombreCancha = new String[1];
+                            refCancha.orderByKey().equalTo(cancha).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot2) {
+                                    DataSnapshot canchaSnapshot = dataSnapshot2.getChildren().iterator().next();
+                                    nombreCancha[0] = canchaSnapshot.child("nombre").getValue().toString();
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+*/ //TODO:Sacar nombre de la cancha
+                            partido = new MiPartido(titulo, cancha, fecha, 0, hora, finalRol);
+                            partidosList.add(partido);
                         }
 
                         @Override
