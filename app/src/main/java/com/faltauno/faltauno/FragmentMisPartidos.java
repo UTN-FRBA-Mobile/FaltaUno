@@ -2,7 +2,9 @@ package com.faltauno.faltauno;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,6 +34,9 @@ public class FragmentMisPartidos extends Fragment {
     private PartidosFragmentAdapter partidosAdapter;
 
     private RecyclerView recyclerView;
+
+    private DataSnapshot misPartidos;
+
 
     public FragmentMisPartidos() {
         // Required empty public constructor
@@ -67,6 +72,27 @@ public class FragmentMisPartidos extends Fragment {
         recyclerView.setAdapter(partidosAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         prepareMisPartidosData();
+        partidosAdapter.setOnClickListener(new PartidosFragmentAdapter.OnClickListener() {
+            @Override
+            public void onClick(Partido partido) {
+                // OBTENGO SI ES HOST O GUEST
+                Object estado = misPartidos.child(partido.id).getValue();
+
+                //ARMO DETALLE PARTIDO
+                FragmentManager fm = getFragmentManager();
+                DetallePartidoDialogFragment detalleDialogFragment = new DetallePartidoDialogFragment();
+                detalleDialogFragment.setArguments(partido, estado);
+                detalleDialogFragment.show(fm, "detalle");
+            }
+        });
+        //Agrego código para abrir fragment NuevoPartidoFragment
+        FloatingActionButton fab1 = (FloatingActionButton) view.findViewById(R.id.nuevoPartido);
+        fab1.setOnClickListener(new View.OnClickListener(){
+            public void onClick (View v){
+                mostrarNuevoPartido();
+            }
+        });
+
     }
 
     private void prepareMisPartidosData() {
@@ -77,6 +103,8 @@ public class FragmentMisPartidos extends Fragment {
             @Override
             public void onDataChange(final DataSnapshot partidosUsuarioSnapshot) {
                 partidosList.clear();
+                misPartidos = partidosUsuarioSnapshot;
+
                 DatabaseReference refPartido = FirebaseDatabase.getInstance().getReference().child("partidos");
                 refPartido.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -87,23 +115,35 @@ public class FragmentMisPartidos extends Fragment {
                             public void onDataChange(DataSnapshot canchasSnapshot) {
                                 for (DataSnapshot partidoUsuarioSnapshot : partidosUsuarioSnapshot.getChildren()) {
                                     String idPartido = partidoUsuarioSnapshot.getKey();
-                                    String rol = partidoUsuarioSnapshot.getValue().toString();
-                                    for (DataSnapshot partidoSnapshot : partidosSnapshot.getChildren()) {
-                                        Partido partido = partidoSnapshot.getValue(Partido.class);
-                                        //Levanto el id del partido
-                                        partido.id = partidoSnapshot.getKey();
-                                        if (partido.id == idPartido) {
-                                            continue;
-                                        }
-                                        //Levanto datos de la cancha
+                                    Partido partido = partidosSnapshot.child(idPartido).getValue(Partido.class);
+                                    if (partido == null){
+                                        continue;
+                                    }
+                                    partido.id = idPartido;
+                                    //Levanto datos de la cancha
                                         Cancha canchaRef = canchasSnapshot.child(partido.cancha).getValue(Cancha.class);
                                         partido.canchaRef = canchaRef;
 
                                         partidosList.add(partido);
-                                    }
-                                    partidosAdapter.setPartidosList(partidosList);
+
+                                    //String rol = partidoUsuarioSnapshot.getValue().toString();
+//                                    for (DataSnapshot partidoSnapshot : partidosSnapshot.getChildren()) {
+//                                        Partido partido = partidoSnapshot.getValue(Partido.class);
+//                                        //Levanto el id del partido
+//                                        partido.id = partidoSnapshot.getKey();
+//                                        if (partido.id.equals(idPartido)){
+//                                            continue;
+//                                        }
+//                                        //Levanto datos de la cancha
+//                                        Cancha canchaRef = canchasSnapshot.child(partido.cancha).getValue(Cancha.class);
+//                                        partido.canchaRef = canchaRef;
+//
+//                                        partidosList.add(partido);
+//                                    }
 
                                 }
+
+                                partidosAdapter.setPartidosList(partidosList);
                             }
 
                             @Override
@@ -125,5 +165,8 @@ public class FragmentMisPartidos extends Fragment {
 
             }
         });
+    }
+    private void mostrarNuevoPartido() {
+        ((MainActivity)getContext()).mostrarNuevoPartido();
     }
 }
