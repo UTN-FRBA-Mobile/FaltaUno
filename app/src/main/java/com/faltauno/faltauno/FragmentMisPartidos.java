@@ -93,15 +93,16 @@ public class FragmentMisPartidos extends Fragment {
                             String host;
                             Long jfaltantes;
                             Partido partido;
-                            for (DataSnapshot partidoSnapshot: dataSnapshot.getChildren()) {
-                                titulo = dataSnapshot.child("titulo").getValue().toString();
-                                cancha = dataSnapshot.child("cancha").getValue().toString();
-                                fecha = dataSnapshot.child("fecha").getValue().toString();
-                                hora = dataSnapshot.child("hora").getValue().toString();
-                                jfaltantes = dataSnapshot.child("jugadoresFaltantes").getValue(Long.class);
+         //                   for (DataSnapshot partidoSnapshot: dataSnapshot.getChildren()) {
+                                DataSnapshot partidoSnapshot = dataSnapshot.getChildren().iterator().next();
+                                titulo = partidoSnapshot.child("titulo").getValue().toString();
+                                cancha = partidoSnapshot.child("cancha").getValue().toString();
+                                fecha = partidoSnapshot.child("fecha").getValue().toString();
+                                hora = partidoSnapshot.child("hora").getValue().toString();
+                                jfaltantes = partidoSnapshot.child("jugadoresFaltantes").getValue(Long.class);
                                 partido = new Partido(titulo, jfaltantes, cancha, "No Jos", fecha, 0, hora);
                                 partidosList.add(partido);
-                            }
+                            //}
                         }
 
                         @Override
