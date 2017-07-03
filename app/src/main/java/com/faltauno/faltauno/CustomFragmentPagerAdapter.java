@@ -29,6 +29,7 @@ public class CustomFragmentPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 1:
                 return FragmentMisPartidos.newInstance(texto);
+//                return PageFragment.newInstance(PAGE_COUNT);
             case 2:
                 return FragmentCanchas.newInstance(texto);
     }
