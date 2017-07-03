@@ -5,13 +5,17 @@ package com.faltauno.faltauno;
  * Adaptador que muestra la fila de partidos. Acá me traigo los datos del partido
  */
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
@@ -21,9 +25,24 @@ public class PartidosFragmentAdapter extends RecyclerView.Adapter<PartidosFragme
 
     private List<Partido> partidosList;
 
+    private OnClickListener listener;
+
+    public interface OnClickListener {
+        void onClick(Partido partido);
+    }
+
     public PartidosFragmentAdapter(Context context, List<Partido> partidosList) {
         layoutInflater = LayoutInflater.from(context);
         this.partidosList = partidosList;
+    }
+
+    public void setOnClickListener(OnClickListener listener) {
+        this.listener = listener;
+    }
+    public void setPartidosList(List<Partido> partidosList) {
+        this.partidosList = partidosList;
+        notifyDataSetChanged();
+        //TODO: refrescar ReyclerView
     }
 
     @Override
@@ -39,12 +58,19 @@ public class PartidosFragmentAdapter extends RecyclerView.Adapter<PartidosFragme
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Partido partido = partidosList.get(position);
-        holder.partido.setText(partido.getNombrePartido());
-        holder.cancha.setText(partido.getCancha());
-        holder.fecha.setText(partido.getFechaPartido());
-        holder.hora.setText(partido.getHoraPartido());
-        holder.jfaltantes.setText(Long.toString(partido.getJugadoresFaltantes()));
+        final Partido partido = partidosList.get(position);
+        holder.partido.setText(partido.titulo);
+        holder.cancha.setText(partido.cancha);
+        holder.fecha.setText(partido.fecha);
+        holder.hora.setText(partido.hora);
+        holder.jfaltantes.setText(Long.toString(partido.jugadoresFaltantes));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(partido);
+            }
+        });
     }
 
     @Override

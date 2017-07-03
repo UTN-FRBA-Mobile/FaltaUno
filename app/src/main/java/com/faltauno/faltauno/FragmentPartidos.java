@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -66,14 +68,34 @@ public class FragmentPartidos extends Fragment {
         recyclerView.setAdapter(partidosAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         preparePartidosData();
-        FloatingActionButton fab1 = (FloatingActionButton) view.findViewById(R.id.nuevoPartido);
+
+        //
+        partidosAdapter.setOnClickListener(new PartidosFragmentAdapter.OnClickListener() {
+            @Override
+            public void onClick(Partido partido) {
+                //ARMO DETALLE PARTIDO
+                FragmentManager fm = getFragmentManager();
+                DetallePartidoDialogFragment detalleDialogFragment = new DetallePartidoDialogFragment();
+                Bundle b = new Bundle();
+                b.putString("idPartido", partido.id);
+                b.putString("titulo",partido.titulo);
+                b.putString("fecha",partido.fecha);
+                b.putString("hora",partido.hora);
+                b.putString("cancha",partido.cancha);
+                b.putLong("jugadoresFaltantes",partido.jugadoresFaltantes);
+
+                detalleDialogFragment.setArguments(b);
+                detalleDialogFragment.show(fm, "detalle");
+            }
+        });
+
         //Agrego código para abrir fragment NuevoPartidoFragment
+        FloatingActionButton fab1 = (FloatingActionButton) view.findViewById(R.id.nuevoPartido);
         fab1.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
                 mostrarNuevoPartido();
             }
         });
-
     }
 
     private void mostrarNuevoPartido() {
@@ -86,24 +108,20 @@ public class FragmentPartidos extends Fragment {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String titulo;
-                String cancha;
-                String fecha;
-                String hora;
-                String host;
-                Long jfaltantes;
-                Partido partido;
+                partidosList.clear();
                 for (DataSnapshot partidoSnapshot: dataSnapshot.getChildren()) {
                     //dbList.add(canchaSnapshot);
-                    titulo = partidoSnapshot.child("titulo").getValue().toString();
-                    cancha = partidoSnapshot.child("cancha").getValue().toString();
-                    fecha = partidoSnapshot.child("fecha").getValue().toString();
-                    hora = partidoSnapshot.child("hora").getValue().toString();
-                    host = partidoSnapshot.child("host").getValue().toString();
-                    jfaltantes = partidoSnapshot.child("jugadoresFaltantes").getValue(Long.class);
-                    partido = new Partido(titulo, jfaltantes, cancha, host, fecha, 0, hora);
+                    String id = partidoSnapshot.getKey();
+                    String titulo = partidoSnapshot.child("titulo").getValue().toString();
+                    String cancha = partidoSnapshot.child("cancha").getValue().toString();
+                    String fecha = partidoSnapshot.child("fecha").getValue().toString();
+                    String hora = partidoSnapshot.child("hora").getValue().toString();
+                    String host = partidoSnapshot.child("host").getValue().toString();
+                    Long jfaltantes = partidoSnapshot.child("jugadoresFaltantes").getValue(Long.class);
+                    Partido partido = new Partido(id, titulo, jfaltantes, cancha, host, fecha, 0, hora);
                     partidosList.add(partido);
                 }
+                partidosAdapter.setPartidosList(partidosList);
             }
 
             @Override

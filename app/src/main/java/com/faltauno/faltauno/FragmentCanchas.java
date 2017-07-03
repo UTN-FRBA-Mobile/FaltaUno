@@ -73,16 +73,15 @@ public class FragmentCanchas extends Fragment {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String nombre;
-                String direccion;
-                Cancha cancha;
+                canchasList.clear();
                 for (DataSnapshot canchaSnapshot: dataSnapshot.getChildren()) {
                     //dbList.add(canchaSnapshot);
-                    nombre = canchaSnapshot.child("nombre").getValue().toString();
-                    direccion = canchaSnapshot.child("direccion").getValue().toString();
-                    cancha = new Cancha(nombre, direccion, R.drawable.googleg_standard_color_18);
+                    String nombre = canchaSnapshot.child("nombre").getValue().toString();
+                    String direccion = canchaSnapshot.child("direccion").getValue().toString();
+                    Cancha cancha = new Cancha(nombre, direccion, R.drawable.googleg_standard_color_18);
                     canchasList.add(cancha);
                 }
+                canchasAdapter.setCanchasList(canchasList);
             }
 
             @Override
