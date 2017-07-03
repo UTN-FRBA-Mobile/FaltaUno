@@ -28,7 +28,7 @@ import static com.faltauno.faltauno.R.id.recyclerViewPartidos;
 public class FragmentMisPartidos extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private List<Partido> partidosList = new ArrayList<>();
-//    private List<PartidoXUsuario> partidosXUsuarioList = new ArrayList<>();
+    //    private List<PartidoXUsuario> partidosXUsuarioList = new ArrayList<>();
     private PartidosFragmentAdapter partidosAdapter;
 
     private RecyclerView recyclerView;
@@ -71,46 +71,53 @@ public class FragmentMisPartidos extends Fragment {
 
     private void prepareMisPartidosData() {
         String usuario;
-        int x;
         usuario = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
-        DatabaseReference dbPartXUser = FirebaseDatabase.getInstance().getReference().child("partidosDelUsuario").child(usuario);
-        dbPartXUser.addValueEventListener(new ValueEventListener() {
+        final DatabaseReference refPartXUser = FirebaseDatabase.getInstance().getReference().child("partidosDelUsuario").child(usuario);
+        refPartXUser.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String nombrePartido;
-                String tipo;
-                for (DataSnapshot partidoUsuarioSnapshot: dataSnapshot.getChildren()) {
-                    nombrePartido = partidoUsuarioSnapshot.getKey().toString();
-                    tipo = partidoUsuarioSnapshot.getValue().toString();
-                    DatabaseReference refPartido = FirebaseDatabase.getInstance().getReference().child("partidos");
-                    refPartido.orderByKey().equalTo(nombrePartido).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            String titulo;
-                            String cancha;
-                            String fecha;
-                            String hora;
-                            String host;
-                            Long jfaltantes;
-                            Partido partido;
-         //                   for (DataSnapshot partidoSnapshot: dataSnapshot.getChildren()) {
-                                DataSnapshot partidoSnapshot = dataSnapshot.getChildren().iterator().next();
-                                titulo = partidoSnapshot.child("titulo").getValue().toString();
-                                cancha = partidoSnapshot.child("cancha").getValue().toString();
-                                fecha = partidoSnapshot.child("fecha").getValue().toString();
-                                hora = partidoSnapshot.child("hora").getValue().toString();
-                                jfaltantes = partidoSnapshot.child("jugadoresFaltantes").getValue(Long.class);
-                                partido = new Partido(titulo, jfaltantes, cancha, "No Jos", fecha, 0, hora);
-                                partidosList.add(partido);
-                            //}
-                        }
+            public void onDataChange(final DataSnapshot partidosUsuarioSnapshot) {
+                partidosList.clear();
+                DatabaseReference refPartido = FirebaseDatabase.getInstance().getReference().child("partidos");
+                refPartido.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(final DataSnapshot partidosSnapshot) {
+                        DatabaseReference refCanchas = FirebaseDatabase.getInstance().getReference().child("canchas");
+                        refCanchas.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot canchasSnapshot) {
+                                for (DataSnapshot partidoUsuarioSnapshot : partidosUsuarioSnapshot.getChildren()) {
+                                    String idPartido = partidoUsuarioSnapshot.getKey();
+                                    String rol = partidoUsuarioSnapshot.getValue().toString();
+                                    for (DataSnapshot partidoSnapshot : partidosSnapshot.getChildren()) {
+                                        Partido partido = partidoSnapshot.getValue(Partido.class);
+                                        //Levanto el id del partido
+                                        partido.id = partidoSnapshot.getKey();
+                                        if (partido.id == idPartido) {
+                                            continue;
+                                        }
+                                        //Levanto datos de la cancha
+                                        Cancha canchaRef = canchasSnapshot.child(partido.cancha).getValue(Cancha.class);
+                                        partido.canchaRef = canchaRef;
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                                        partidosList.add(partido);
+                                    }
+                                    partidosAdapter.setPartidosList(partidosList);
 
-                        }
-                    });
-                }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
 
             @Override

@@ -60,7 +60,7 @@ public class PartidosFragmentAdapter extends RecyclerView.Adapter<PartidosFragme
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Partido partido = partidosList.get(position);
         holder.partido.setText(partido.titulo);
-        holder.cancha.setText(partido.cancha);
+        holder.cancha.setText(partido.canchaRef.getNombre());
         holder.fecha.setText(partido.fecha);
         holder.hora.setText(partido.hora);
         holder.jfaltantes.setText(Long.toString(partido.jugadoresFaltantes));
