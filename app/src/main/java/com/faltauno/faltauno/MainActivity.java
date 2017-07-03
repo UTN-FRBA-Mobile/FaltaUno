@@ -1,12 +1,18 @@
 package com.faltauno.faltauno;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.TabLayout;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -22,6 +28,18 @@ import android.widget.LinearLayout;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "Info de Usuario";
+
+    private double userLatitude;
+    private double userLongitude;
+
+    Gps gps;
+    private static final String[] LOCATION_PERMS={
+            android.Manifest.permission.ACCESS_FINE_LOCATION,
+            android.Manifest.permission.ACCESS_COARSE_LOCATION
+    };
+
+    private static final int INITIAL_REQUEST=1337;
+    private static final int LOCATION_REQUEST=INITIAL_REQUEST+1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        LinearLayout main_linear = (LinearLayout)findViewById(R.id.parent);
+
+        //lgonzalez: agrego peticion de permisos para geoloc
+        gps = new Gps(this);
+        ActivityCompat.requestPermissions(this, LOCATION_PERMS, LOCATION_REQUEST);
 //  esto no se usa en ningun lado!!      LinearLayout main_linear = (LinearLayout)findViewById(R.id.parent);
     }
 
@@ -75,6 +98,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        final Intent settings = new Intent(this, SettingsActivity.class);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
 /*  esto no se usa en ningun lado!! --> */     //final Intent settings = new Intent(this, SettingsActivity.class);
         return true;
     }
@@ -169,6 +202,52 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager m = getSupportFragmentManager();
         // Saco el último fragment que cargué para volver al pager viewer
         m.popBackStack();
+    }
+
+    //este metodo es el callback para cuando el usuario acepto o rechazo dar los permisos
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case LOCATION_REQUEST: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // los permisos fueron dados, busco la location
+                    updateLocation(this.getCurrentFocus());
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+        }
+    }
+
+    public double getUserLatitude() {
+        return userLatitude;
+    }
+
+    public void setUserLatitude(double userLatitude) {
+        this.userLatitude = userLatitude;
+    }
+
+    public double getUserLongitude() {
+        return userLongitude;
+    }
+
+    public void setUserLongitude(double userLongitude) {
+        this.userLongitude = userLongitude;
+    }
+
+    void updateLocation(View view){
+        //genera la location y guarda latitud y longitud del usuario
+        Location location = gps.getLocation();
+        setUserLatitude(location.getLatitude());
+        setUserLongitude(location.getLongitude());
     }
 }
 

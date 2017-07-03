@@ -119,18 +119,18 @@ public class NuevoPartidoFragment extends Fragment {
 
         });
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("canchas");
-              //  .child("c1").child("nombre");
+        //  .child("c1").child("nombre");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
-               ArrayList spinnerList = new ArrayList();
+                ArrayList spinnerList = new ArrayList();
                 canchasList = new ArrayList();
-               for (DataSnapshot canchaSnapshot: snapshot.getChildren()) {
+                for (DataSnapshot canchaSnapshot: snapshot.getChildren()) {
 //                   Cancha cancha = canchaSnapshot.getValue(Cancha.class);
-                   canchasList.add(canchaSnapshot);
+                    canchasList.add(canchaSnapshot);
                     //Toast.makeText(getActivity(), snapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
-                  //Toast.makeText(getActivity(), canchaSnapshot.child("nombre").getValue().toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), canchaSnapshot.child("nombre").getValue().toString(), Toast.LENGTH_SHORT).show();
                     spinnerList.add(canchaSnapshot.child("nombre").getValue().toString());
                 }
                 spinnerList.add("Agregar cancha +");
@@ -189,17 +189,17 @@ public class NuevoPartidoFragment extends Fragment {
         fecha = fechaPartido.getText().toString();
         hora = horaPartido.getText().toString();
         Long jfaltantes = new Long(faltantes); //TODO: Ver con Vane la clase genérica
-        Partido nuevoPartido = new Partido(nombre, jfaltantes,cancha, host,fecha,img,hora);
 
         //GRABO PARTIDO NUEVO
         DatabaseReference partidos = FirebaseDatabase.getInstance().getReference().child("partidos");
         String clave = partidos.push().getKey();
+        Partido nuevoPartido = new Partido(clave,nombre, jfaltantes,cancha, host,fecha,img,hora);
         partidos.child(clave).setValue(nuevoPartido);
 
         //GRABO PARTIDOS DEL USUARIO
         DatabaseReference partidosDelUsuario = FirebaseDatabase.getInstance().getReference().child("partidosDelUsuario");
         partidosDelUsuario.child(host).child(clave).setValue("host");
-        
+
     }
 
     public static Fragment newInstance(String texto) {
@@ -252,7 +252,3 @@ public class NuevoPartidoFragment extends Fragment {
         ((MainActivity)getContext()).mostrarNuevaCancha();
     }
 }
-
-
-
-

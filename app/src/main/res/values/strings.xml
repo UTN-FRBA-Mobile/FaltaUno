@@ -51,6 +51,15 @@
     <string name="crear_cancha_ubicacion">Ingresa Ubicacion</string>
     <string name="crear_cancha_agregar_foto">Agrega una foto de la cancha</string>
     <string name="crear_cancha_button_ok">Crear Cancha!</string>
+    <string name="mis_partidos_cancha">Cancha:</string>
+    <string name="mis_partidos_fecha">Fecha:</string>
+    <string name="mis_partidos_hora">Hora:</string>
+    <string name="mis_partidos_rol">Rol:</string>
+    <string name="partidos_jugadores_faltantes">Jugadores Faltantes:</string>
+    <string name="partido_creado_por">Creado Por:</string>
+    <string name="button_crearPartido">Crear Partido!</string>
+    <string name="pref_sec_settings">Preferencias Acceso a Dispositivo</string>
+    <string name="pref_hist_settings">Preferencias Acceso a Aplicación</string>
     <string-array name="cant_jugadores_array">
         <item>5</item>
         <item>7</item>

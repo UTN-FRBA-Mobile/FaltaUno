@@ -9,4 +9,8 @@
     <dimen name="titulo">30dp</dimen>
     <dimen name="editText">20dp</dimen>
     <dimen name="buttonText">15dp</dimen>
+    <dimen name="separador_largo_row">100dp</dimen>
+    <dimen name="separador_largo_partido_row">110dp</dimen>
+    <dimen name="card_row_border">8dp</dimen>
+    <dimen name="spinner">40dp</dimen>
 </resources>
