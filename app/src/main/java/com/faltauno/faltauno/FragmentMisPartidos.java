@@ -28,7 +28,7 @@ import static com.faltauno.faltauno.R.id.recyclerViewPartidos;
 public class FragmentMisPartidos extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private List<Partido> partidosList = new ArrayList<>();
-    private List<PartidoXUsuario> partidosXUsuarioList = new ArrayList<>();
+//    private List<PartidoXUsuario> partidosXUsuarioList = new ArrayList<>();
     private PartidosFragmentAdapter partidosAdapter;
 
     private RecyclerView recyclerView;
@@ -80,10 +80,35 @@ public class FragmentMisPartidos extends Fragment {
                 String nombrePartido;
                 String tipo;
                 for (DataSnapshot partidoUsuarioSnapshot: dataSnapshot.getChildren()) {
-                    nombrePartido = partidoUsuarioSnapshot.getValue().toString();
-                    tipo = partidoUsuarioSnapshot.child(nombrePartido).getValue().toString();
-                    PartidoXUsuario partidoXUsuario = new PartidoXUsuario(nombrePartido, tipo);
-                    partidosXUsuarioList.add(partidoXUsuario);
+                    nombrePartido = partidoUsuarioSnapshot.getKey().toString();
+                    tipo = partidoUsuarioSnapshot.getValue().toString();
+                    DatabaseReference refPartido = FirebaseDatabase.getInstance().getReference().child("partidos");
+                    refPartido.orderByKey().equalTo(nombrePartido).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            String titulo;
+                            String cancha;
+                            String fecha;
+                            String hora;
+                            String host;
+                            Long jfaltantes;
+                            Partido partido;
+                            for (DataSnapshot partidoSnapshot: dataSnapshot.getChildren()) {
+                                titulo = dataSnapshot.child("titulo").getValue().toString();
+                                cancha = dataSnapshot.child("cancha").getValue().toString();
+                                fecha = dataSnapshot.child("fecha").getValue().toString();
+                                hora = dataSnapshot.child("hora").getValue().toString();
+                                jfaltantes = dataSnapshot.child("jugadoresFaltantes").getValue(Long.class);
+                                partido = new Partido(titulo, jfaltantes, cancha, "No Jos", fecha, 0, hora);
+                                partidosList.add(partido);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
                 }
             }
 
@@ -92,34 +117,5 @@ public class FragmentMisPartidos extends Fragment {
 
             }
         });
-        for(x=0;x<partidosXUsuarioList.size();x++){
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("partidos").child(partidosXUsuarioList.get(x).getNombrePartido());
-            ref.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    String titulo;
-                    String cancha;
-                    String fecha;
-                    String hora;
-                    String host;
-                    Long jfaltantes;
-                    Partido partido;
-                    for (DataSnapshot partidoSnapshot: dataSnapshot.getChildren()) {
-                        titulo = partidoSnapshot.child("titulo").getValue().toString();
-                        cancha = partidoSnapshot.child("cancha").getValue().toString();
-                        fecha = partidoSnapshot.child("fecha").getValue().toString();
-                        hora = partidoSnapshot.child("hora").getValue().toString();
-                        jfaltantes = partidoSnapshot.child("jugadoresFaltantes").getValue(Long.class);
-                        partido = new Partido(titulo, jfaltantes, cancha, "No Jos", fecha, 0, hora);
-                        partidosList.add(partido);
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        }
     }
 }
