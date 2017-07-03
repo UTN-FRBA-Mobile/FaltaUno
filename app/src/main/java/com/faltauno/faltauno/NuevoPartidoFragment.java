@@ -1,7 +1,10 @@
 package com.faltauno.faltauno;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 //import android.app.Fragment;
@@ -110,14 +113,33 @@ public class NuevoPartidoFragment extends Fragment {
 
         //Para Botón
         Button botonCrea = (Button) vista.findViewById(R.id.botonCrear);
-        botonCrea.setOnClickListener(new View.OnClickListener(){
+        botonCrea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                grabarPartido();
-                ((MainActivity)getContext()).cerrarNuevoPartido();
-            }
+                //VERIFICO DATA
+                String nombre = nombrePartido.getText().toString();
+                String fecha = fechaPartido.getText().toString();
+                String hora = horaPartido.getText().toString();
+                if (!nombre.isEmpty() && !fecha.isEmpty() && !hora.isEmpty()) {
+                    grabarPartido();
+                    ((MainActivity) getContext()).cerrarNuevoPartido();
+                } else {
+                   AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                   builder.setTitle("Advertencia");
+                   builder.setMessage("Faltan llenar datos");
+                   builder.setNegativeButton("Aceptar", new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
 
+                   });
+                    builder.create();
+                    builder.show();
+                }
+            }
         });
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("canchas");
         //  .child("c1").child("nombre");
         ref.addValueEventListener(new ValueEventListener() {
@@ -166,9 +188,9 @@ public class NuevoPartidoFragment extends Fragment {
 
     private void grabarPartido() {
 
-        //Levanta user
-        FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("<id_usuario>");
+//        //Levanta user
+//        FirebaseAuth.getInstance().getCurrentUser();
+//        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("<id_usuario>");
 
         //Grabar Campos
         String nombre ="";
@@ -188,7 +210,7 @@ public class NuevoPartidoFragment extends Fragment {
         host = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
         fecha = fechaPartido.getText().toString();
         hora = horaPartido.getText().toString();
-        Long jfaltantes = new Long(faltantes); //TODO: Ver con Vane la clase genérica
+        Long jfaltantes = new Long(faltantes);
 
         //GRABO PARTIDO NUEVO
         DatabaseReference partidos = FirebaseDatabase.getInstance().getReference().child("partidos");
