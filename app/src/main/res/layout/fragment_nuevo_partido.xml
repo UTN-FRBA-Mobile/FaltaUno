@@ -44,8 +44,8 @@
             android:ems="10"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:textSize="@dimen/titulo"
             android:overlapAnchor="false"
+            android:theme="@style/spinnerCanchas"
             android:background="@color/hueso"/>
         <LinearLayout
             android:id="@+id/l1"

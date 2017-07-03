@@ -39,6 +39,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static java.util.Collections.reverse;
+
 
 public class NuevoPartidoFragment extends Fragment {
 
@@ -155,6 +157,7 @@ public class NuevoPartidoFragment extends Fragment {
                     //Toast.makeText(getActivity(), canchaSnapshot.child("nombre").getValue().toString(), Toast.LENGTH_SHORT).show();
                     spinnerList.add(canchaSnapshot.child("nombre").getValue().toString());
                 }
+                reverse(spinnerList);
                 spinnerList.add("Agregar cancha +");
                 //Armo el Spinner de canchas
                 spinner = (Spinner) vista.findViewById(R.id.spinner);

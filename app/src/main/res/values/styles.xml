@@ -37,5 +37,10 @@
         <item name="android:textSize">25dp</item>
     </style>
 
+    //Agrego style para agrandar fuente de spinner
+    <style name="spinnerCanchas">
+        <item name="android:textSize">20dp</item>
+    </style>
+
 
 </resources>
