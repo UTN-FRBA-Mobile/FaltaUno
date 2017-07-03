@@ -21,7 +21,7 @@
     <style name="FaltaUno" parent="AppTheme" >
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/verde_azulado_intenso</item>
+        <item name="colorAccent">@color/verde_azulado_oscuro</item>
     </style>
 
     <style name="FaltaUno.NoActionBar">
