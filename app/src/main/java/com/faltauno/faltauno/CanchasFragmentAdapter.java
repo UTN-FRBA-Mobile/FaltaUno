@@ -28,6 +28,11 @@ public class CanchasFragmentAdapter extends RecyclerView.Adapter<CanchasFragment
         this.canchasList = canchasList;
     }
 
+    public void setCanchasList(List<Cancha> canchasList) {
+        this.canchasList = canchasList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemViewType(int position) {
         return super.getItemViewType(position);

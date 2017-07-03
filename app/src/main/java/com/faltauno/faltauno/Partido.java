@@ -13,9 +13,11 @@ public class Partido {
     public String fecha;
     public String hora;
     public int imagen;
+    public String id;
 
-    public Partido(String nombrePartido, Long jugadoresFaltantes, String cancha,
+    public Partido(String id, String nombrePartido, Long jugadoresFaltantes, String cancha,
                    String creadoPor, String fechaPartido, int imagen, String horaPartido){
+        this.id = id;
         this.titulo = nombrePartido;
         this.jugadoresFaltantes = jugadoresFaltantes;
         this.cancha = cancha;
@@ -25,24 +27,25 @@ public class Partido {
         imagen= (int) (Math.random()*20)+18;
     }
 
-    public String getNombrePartido() {
-        return titulo;
-    }
-    public Long getJugadoresFaltantes() {
-        return jugadoresFaltantes;
-    }
-    public String getCancha() {
-        return cancha;
-    }
-    public String getCreadoPor() {
-        return host;
-    }
-    public String getFechaPartido() {
-        return fecha;
-    }
-    public String getHoraPartido() {
-        return hora;
-    }
+//    public String getNombrePartido() {
+//        return titulo;
+//    }
+//    public Long getJugadoresFaltantes() {
+//        return jugadoresFaltantes;
+//    }
+//    public String getCancha() {
+//        return cancha;
+//    }
+//    public String getCreadoPor() {
+//        return host;
+//    }
+//    public String getFechaPartido() {
+//        return fecha;
+//    }
+//    public String getHoraPartido() {
+//        return hora;
+//    }
+
 /*    public int getImagen() {
         return mImagen;
     }
