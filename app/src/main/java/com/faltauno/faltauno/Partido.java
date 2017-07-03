@@ -1,5 +1,7 @@
 package com.faltauno.faltauno;
 
+import com.google.firebase.database.Exclude;
+
 /**
  * Created by Exequiel on 28/05/2017.
  * Clase para trabajar los elementos de Partido
@@ -13,7 +15,14 @@ public class Partido {
     public String fecha;
     public String hora;
     public int imagen;
+
+    @Exclude
     public String id;
+
+    @Exclude
+    public Cancha canchaRef;
+
+    public Partido() {}
 
     public Partido(String id, String nombrePartido, Long jugadoresFaltantes, String cancha,
                    String creadoPor, String fechaPartido, int imagen, String horaPartido){

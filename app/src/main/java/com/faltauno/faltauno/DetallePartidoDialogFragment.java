@@ -28,6 +28,8 @@ public class DetallePartidoDialogFragment extends DialogFragment {
 
         //String titulo = getArguments().getString("titulo");
         final String id = getArguments().getString("idPartido");
+
+        String nombreCancha = getArguments().getString("cancha.nombre");
         //String cancha = getArguments().getString("cancha");
         //String fecha = getArguments().getString("fecha");
         //String hora = getArguments().getString("hora");
@@ -45,6 +47,9 @@ public class DetallePartidoDialogFragment extends DialogFragment {
 
         TextView nombre = (TextView) view.findViewById(R.id.detParNombrePartido);
         nombre.setText(getArguments().getString("titulo"));
+
+        TextView cancha= (TextView) view.findViewById(R.id.detParCancha);
+        cancha.setText("Lugar: "+getArguments().getString("cancha.nombre"));
 
         TextView fechaP = (TextView) view.findViewById(R.id.detParDiaPartido);
         fechaP.setText("Día: "+getArguments().getString("fecha"));

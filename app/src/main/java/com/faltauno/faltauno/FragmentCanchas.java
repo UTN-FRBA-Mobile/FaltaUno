@@ -75,10 +75,9 @@ public class FragmentCanchas extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 canchasList.clear();
                 for (DataSnapshot canchaSnapshot: dataSnapshot.getChildren()) {
-                    //dbList.add(canchaSnapshot);
-                    String nombre = canchaSnapshot.child("nombre").getValue().toString();
-                    String direccion = canchaSnapshot.child("direccion").getValue().toString();
-                    Cancha cancha = new Cancha(nombre, direccion, R.drawable.googleg_standard_color_18);
+                    Cancha cancha = canchaSnapshot.getValue(Cancha.class);
+                    cancha.setImagen(R.drawable.googleg_standard_color_18);
+
                     canchasList.add(cancha);
                 }
                 canchasAdapter.setCanchasList(canchasList);

@@ -83,6 +83,7 @@ public class FragmentPartidos extends Fragment {
                 b.putString("hora",partido.hora);
                 b.putString("cancha",partido.cancha);
                 b.putLong("jugadoresFaltantes",partido.jugadoresFaltantes);
+                b.putString("cancha.nombre", partido.canchaRef.getNombre());
 
                 detalleDialogFragment.setArguments(b);
                 detalleDialogFragment.show(fm, "detalle");
@@ -104,24 +105,39 @@ public class FragmentPartidos extends Fragment {
 
     private void preparePartidosData() {
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("partidos");
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("partidos");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(final DataSnapshot partidosSnapshot) {
                 partidosList.clear();
-                for (DataSnapshot partidoSnapshot: dataSnapshot.getChildren()) {
-                    //dbList.add(canchaSnapshot);
-                    String id = partidoSnapshot.getKey();
-                    String titulo = partidoSnapshot.child("titulo").getValue().toString();
-                    String cancha = partidoSnapshot.child("cancha").getValue().toString();
-                    String fecha = partidoSnapshot.child("fecha").getValue().toString();
-                    String hora = partidoSnapshot.child("hora").getValue().toString();
-                    String host = partidoSnapshot.child("host").getValue().toString();
-                    Long jfaltantes = partidoSnapshot.child("jugadoresFaltantes").getValue(Long.class);
-                    Partido partido = new Partido(id, titulo, jfaltantes, cancha, host, fecha, 0, hora);
-                    partidosList.add(partido);
-                }
-                partidosAdapter.setPartidosList(partidosList);
+                DatabaseReference refCanchas = FirebaseDatabase.getInstance().getReference().child("canchas");
+                refCanchas.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot canchasSnapshot) {
+                        for (DataSnapshot partidoSnapshot: partidosSnapshot.getChildren()) {
+                            Partido partido = partidoSnapshot.getValue(Partido.class);
+                            if (partido.jugadoresFaltantes==0) {
+                                continue;
+                            }
+                            //Levanto el id del partido
+                            partido.id = partidoSnapshot.getKey();
+
+                            //Levanto datos de la cancha
+                            Cancha canchaRef = canchasSnapshot.child(partido.cancha).getValue(Cancha.class);
+                            partido.canchaRef = canchaRef;
+
+                            partidosList.add(partido);
+                        }
+                        partidosAdapter.setPartidosList(partidosList);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
             }
 
             @Override
