@@ -8,13 +8,11 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.database.DatabaseUtilsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +39,7 @@ public class FragmentPartidos extends Fragment {
     private PartidosFragmentAdapter partidosAdapter;
     private DataSnapshot misPartidos;
     private Geocoder geocoder;
+    private LocalLocationManager localLocationManager = LocalLocationManager.getInstance();
 
 
     private RecyclerView recyclerView;
@@ -151,10 +150,14 @@ public class FragmentPartidos extends Fragment {
                                 e.printStackTrace();
                                 partido.setDistancia(new Float(99999.999));
                             }
+
                             partidosList.add(partido);
                         }
 
-                        sortList(partidosList); //ordenar la lista por distancia antes de mostrarla en pantalla
+                        if(localLocationManager.locationPermissionGranted){
+                            sortList(partidosList); //ordenar la lista por distancia antes de mostrarla en pantalla
+                        }
+
                         partidosAdapter.setPartidosList(partidosList);
                     }
 
@@ -180,8 +183,8 @@ public class FragmentPartidos extends Fragment {
         canchaLocation.setLongitude(add.getLongitude());
 
         Location userLocation = new Location("User Location");
-        userLocation.setLatitude(((MainActivity)getContext()).getUserLatitude());
-        userLocation.setLongitude(((MainActivity)getContext()).getUserLongitude());
+        userLocation.setLatitude(localLocationManager.getUserLatitude());
+        userLocation.setLongitude(localLocationManager.getUserLongitude());
         Float dist = canchaLocation.distanceTo(userLocation);
 
         System.out.println("la distancia entre la cancha " + dir + " y el usuario que esta en " + userLocation.toString()

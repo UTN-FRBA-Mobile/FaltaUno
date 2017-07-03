@@ -3,10 +3,7 @@ package com.faltauno.faltauno;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "Info de Usuario";
 
-    private double userLatitude;
-    private double userLongitude;
+    private LocalLocationManager localLocationManager;
 
     Gps gps;
     private static final String[] LOCATION_PERMS={
@@ -46,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        localLocationManager = LocalLocationManager.getInstance(new Gps(this));
 
         //Visualizacion del menu de la toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -83,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout main_linear = (LinearLayout)findViewById(R.id.parent);
 
         //lgonzalez: agrego peticion de permisos para geoloc
-        gps = new Gps(this);
-        ActivityCompat.requestPermissions(this, LOCATION_PERMS, LOCATION_REQUEST);
+        localLocationManager.showRequestPermission(this, LOCATION_PERMS, LOCATION_REQUEST);
 //  esto no se usa en ningun lado!!      LinearLayout main_linear = (LinearLayout)findViewById(R.id.parent);
     }
 
@@ -204,50 +200,5 @@ public class MainActivity extends AppCompatActivity {
         m.popBackStack();
     }
 
-    //este metodo es el callback para cuando el usuario acepto o rechazo dar los permisos
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case LOCATION_REQUEST: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // los permisos fueron dados, busco la location
-                    updateLocation(this.getCurrentFocus());
-
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-
-        }
-    }
-
-    public double getUserLatitude() {
-        return userLatitude;
-    }
-
-    public void setUserLatitude(double userLatitude) {
-        this.userLatitude = userLatitude;
-    }
-
-    public double getUserLongitude() {
-        return userLongitude;
-    }
-
-    public void setUserLongitude(double userLongitude) {
-        this.userLongitude = userLongitude;
-    }
-
-    void updateLocation(View view){
-        //genera la location y guarda latitud y longitud del usuario
-        Location location = gps.getLocation();
-        setUserLatitude(location.getLatitude());
-        setUserLongitude(location.getLongitude());
-    }
 }
 
