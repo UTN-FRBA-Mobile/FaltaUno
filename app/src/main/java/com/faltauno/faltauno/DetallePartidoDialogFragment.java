@@ -22,6 +22,24 @@ import com.google.firebase.database.FirebaseDatabase;
 public class DetallePartidoDialogFragment extends DialogFragment {
     private Partido partido;
 
+    public void setArguments(Partido partido, Object estado) {
+        Bundle b = new Bundle();
+        b.putString("idPartido", partido.id);
+        b.putString("titulo",partido.titulo);
+        b.putString("fecha",partido.fecha);
+        b.putString("hora",partido.hora);
+        b.putString("cancha",partido.cancha);
+        b.putLong("jugadoresFaltantes",partido.jugadoresFaltantes);
+        b.putString("cancha.nombre", partido.canchaRef.getNombre());
+
+        if (estado != null) {
+            b.putString("estado", estado.toString());
+        } else {
+            b.putString("estado", "nada");
+        }
+
+        setArguments(b);
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -41,6 +59,7 @@ public class DetallePartidoDialogFragment extends DialogFragment {
         // Get the layout inflater
         final LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_det_partido, null);
+
 
         TextView horario= (TextView) view.findViewById(R.id.detParHoraPartido);
         horario.setText("Hora: "+getArguments().getString("hora"));
@@ -64,6 +83,24 @@ public class DetallePartidoDialogFragment extends DialogFragment {
         }
         jFaltantes.setText(queda+" "+String.valueOf(jFalta)+" "+lugar);
 
+        //VERIFICO SI EN EL PARTIDO ELEGIDO SOY HOST O GUEST
+        final String estado = getArguments().getString("estado");
+
+        Button botonUnirse = (Button) view.findViewById(R.id.botonUnirse);
+
+        if (estado.equals("host")){
+            //// TODO:
+            //Poner el boton "unirse" en "eliminar partido"
+            botonUnirse.setText("Eliminar Partido");
+            //Borrar a los users q esten en el partido y borrar el partido
+
+        } else if (estado.equals("guest")) {
+            //todo:
+            //Poner boton "unirse"en "bajarse"
+            botonUnirse.setText("Bajarse del Partido");
+            //borrar mi referencia a ese partido
+        }
+
         builder.setView(view);
         Button botonCancel = (Button) view.findViewById(R.id.botonCancelar);
         botonCancel.setOnClickListener(new View.OnClickListener(){
@@ -72,27 +109,50 @@ public class DetallePartidoDialogFragment extends DialogFragment {
                 DetallePartidoDialogFragment.this.getDialog().dismiss();
             }
         });
-        Button botonUnirse = (Button) view.findViewById(R.id.botonUnirse);
+
         botonUnirse.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 String host = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
-                //GRABAR JOIN
-                DatabaseReference partidosDelUsuario = FirebaseDatabase.getInstance().getReference().child("partidosDelUsuario");
-                partidosDelUsuario.child(host).child(id).setValue("guest");
-                //DESCONTAR FALTANTES
-
-                DatabaseReference partidos = FirebaseDatabase.getInstance().getReference().child("partidos");
-                //String clave = partidos.push().getKey();
-                //Partido nuevoPartido = new Partido(clave,nombre, jfaltantes,cancha, host,fecha,img,hora);
-
-                partidos.child(id).child("jugadoresFaltantes").setValue(jFalta-1);
+                if (estado.equals("host")) {
+                    borrar(id, host);
+                } else if (estado.equals("guest")) {
+                    unirse(id, host, jFalta);
+                } else {
+                    unirse(id, host, jFalta);
+                }
                 DetallePartidoDialogFragment.this.getDialog().dismiss();
-
-
-
             }
         });
         return builder.create();
+    }
+
+    private void unirse(String idPartido, String idUser, long jugadoresFaltantes) {
+        //GRABAR JOIN
+        DatabaseReference partidosDelUsuario = FirebaseDatabase.getInstance().getReference().child("partidosDelUsuario");
+        partidosDelUsuario.child(idUser).child(idPartido).setValue("guest");
+
+        //DESCONTAR FALTANTES
+        DatabaseReference partidos = FirebaseDatabase.getInstance().getReference().child("partidos");
+        partidos.child(idPartido).child("jugadoresFaltantes").setValue(jugadoresFaltantes - 1);
+    }
+
+    private void salirse(String idPartido, String idUser, long jugadoresFaltantes) {
+        //BORRAR JOIN
+        DatabaseReference partidosDelUsuario = FirebaseDatabase.getInstance().getReference().child("partidosDelUsuario");
+        partidosDelUsuario.child(idUser).child(idPartido).removeValue();
+
+        //INCREMENTAR FALTANTES
+        DatabaseReference partidos = FirebaseDatabase.getInstance().getReference().child("partidos");
+        partidos.child(idPartido).child("jugadoresFaltantes").setValue(jugadoresFaltantes + 1);
+    }
+
+    private void borrar(String idPartido, String idUser) {
+        DatabaseReference partidosDelUsuario = FirebaseDatabase.getInstance().getReference().child("partidosDelUsuario");
+        //todo: recorrer partidos y borrar
+
+        //BORRAR PARTIDO
+        DatabaseReference partidos = FirebaseDatabase.getInstance().getReference().child("partidos");
+        partidos.child(idPartido).removeValue();
     }
 }
