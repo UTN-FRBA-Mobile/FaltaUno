@@ -1,5 +1,7 @@
 package com.faltauno.faltauno;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -10,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.TabLayout;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -82,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         //lgonzalez: agrego peticion de permisos para geoloc
         gps = new Gps(this);
         ActivityCompat.requestPermissions(this, LOCATION_PERMS, LOCATION_REQUEST);
+//  esto no se usa en ningun lado!!      LinearLayout main_linear = (LinearLayout)findViewById(R.id.parent);
     }
 
     private void andaYLogueate() {
@@ -95,6 +99,16 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         final Intent settings = new Intent(this, SettingsActivity.class);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+/*  esto no se usa en ningun lado!! --> */     //final Intent settings = new Intent(this, SettingsActivity.class);
         return true;
     }
 

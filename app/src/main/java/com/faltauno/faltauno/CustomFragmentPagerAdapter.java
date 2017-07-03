@@ -4,6 +4,9 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.widget.Toast;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 //import android.app.FragmentManager;
 
@@ -26,6 +29,7 @@ public class CustomFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         String texto = "esto es un texto";
         //Por default devuelvo siempre el de proximos partidos
+
         switch (position) {
             case 1:
                 return FragmentMisPartidos.newInstance(texto);

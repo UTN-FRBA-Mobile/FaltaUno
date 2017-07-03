@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-<PreferenceCategory
-    android:key="pref_key_security_settings">
+<PreferenceCategory android:title="@string/pref_sec_settings"
+    android:key="pref_key_security_settings"
+    android:layout="@layout/security_row_pref">
     <SwitchPreference
         android:key="pref_key_location"
         android:summary="@string/pref_summary_location"
         android:title="@string/pref_title_location"
         android:defaultValue="false"/>
-    </PreferenceCategory>
-    <PreferenceCategory
-        android:key="pref_key_app_settings">
+    <SwitchPreference
+        android:key="pref_key_camera"
+        android:summary="@string/pref_key_camera"
+        android:title="@string/pref_title_camera"
+        android:defaultValue="false"/>
+</PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_hist_settings"
+        android:key="pref_key_app_settings"
+        android:layout="@layout/app_row_pref">
         <SwitchPreference
             android:key="pref_key_history"
             android:summary="@string/pref_summary_history"
             android:title="@string/pref_title_history"
             android:defaultValue="false"/>
     </PreferenceCategory>
-    <PreferenceCategoryAboutDialogFragment
+    <PreferenceCategory
         android:key="pref_key_cammera_settings">
         <SwitchPreference
             android:key="pref_key_camera"
             android:summary="@string/pref_key_camera"
             android:title="@string/pref_title_camera"
             android:defaultValue="false"/>
-    </PreferenceCategoryAboutDialogFragment>
+    </PreferenceCategory>
+    <!--AboutDialogFragment-->
 </PreferenceScreen>

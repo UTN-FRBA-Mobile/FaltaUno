@@ -106,6 +106,7 @@
             android:layout_height="wrap_content"
             android:text="@string/crear_cancha_agregar_foto"
             android:layout_gravity="center"
+            android:visibility="invisible"
             android:textColor="@color/black"
             android:textSize="@dimen/editText"
             android:layout_margin="@dimen/editText"/>

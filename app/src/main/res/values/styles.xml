@@ -21,7 +21,7 @@
     <style name="FaltaUno" parent="AppTheme" >
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/verde_azulado_intenso</item>
+        <item name="colorAccent">@color/verde_azulado_oscuro</item>
     </style>
 
     <style name="FaltaUno.NoActionBar">
@@ -35,6 +35,11 @@
     //Agrego style para poder aumentar la fuente del numberPicker
     <style name="NumberPickerText">
         <item name="android:textSize">25dp</item>
+    </style>
+
+    //Agrego style para agrandar fuente de spinner
+    <style name="spinnerCanchas">
+        <item name="android:textSize">20dp</item>
     </style>
 
 
