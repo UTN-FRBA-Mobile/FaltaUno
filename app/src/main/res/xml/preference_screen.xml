@@ -8,11 +8,6 @@
         android:summary="@string/pref_summary_location"
         android:title="@string/pref_title_location"
         android:defaultValue="false"/>
-    <SwitchPreference
-        android:key="pref_key_camera"
-        android:summary="@string/pref_key_camera"
-        android:title="@string/pref_title_camera"
-        android:defaultValue="false"/>
 </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_hist_settings"
         android:key="pref_key_app_settings"
